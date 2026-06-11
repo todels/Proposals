@@ -256,32 +256,41 @@
       margin: 12px 0;
     }
 
-    /* ─── LOGOS ────────────────────────────────── */
-    .logos-row {
+    /* ─── LOGOS TICKER ─────────────────────────── */
+    .logos-ticker {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .logos-track {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: clamp(24px, 3.3vw, 48px);
-      flex-wrap: nowrap;
-      overflow: hidden;
+      width: max-content;
+      animation: ticker-scroll 18s linear infinite;
+    }
+
+    .logos-track:hover { animation-play-state: paused; }
+
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
     }
 
     .logo-item {
-      height: clamp(40px, 5.5vw, 80px);
-      flex-shrink: 1;
+      height: clamp(36px, 4.5vw, 64px);
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-width: 0;
+      padding: 0 clamp(28px, 4vw, 56px);
     }
 
     .logo-item img {
       height: 100%;
       width: auto;
-      max-width: 240px;
+      max-width: 200px;
       object-fit: contain;
       display: block;
-      flex-shrink: 1;
     }
 
     /* ─── SECTION HEADER ───────────────────────── */
@@ -743,16 +752,19 @@
     }
 
     /* ─── CASE STUDIES ─────────────────────────── */
-    .case-scroll-wrap {
-      overflow: hidden;
-      margin: 0 calc(-1 * clamp(24px, 7.8vw, 112px));
+    .cases-section {
+      padding-bottom: clamp(8px, 0.6vw, 8px);
+    }
+
+    .cases-section .section-head {
+      padding: clamp(40px, 6.7vw, 96px) clamp(16px, 11.7vw, 169px) clamp(24px, 2.2vw, 32px);
+      margin-bottom: 0;
     }
 
     .case-scroll {
       display: flex;
-      gap: 24px;
+      gap: 0;
       overflow-x: auto;
-      padding: 0 clamp(24px, 7.8vw, 112px) 12px;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
@@ -762,7 +774,8 @@
 
     .case-card {
       flex-shrink: 0;
-      width: clamp(260px, 38.9vw, 560px);
+      width: 100vw;
+      padding: 0 clamp(16px, 11.7vw, 169px) clamp(40px, 6.7vw, 96px);
       display: flex;
       flex-direction: column;
       gap: 14px;
@@ -907,6 +920,15 @@
       .accordion-divider { margin: 0 -20px; }
 
       .stats-item { flex: 0 0 50%; }
+
+      .container { padding: 0 16px; }
+      .pad-section { padding: 32px 16px; }
+      .pad-logos   { padding: 16px; }
+      .pad-stats   { padding: 20px 16px; }
+      .pad-ty      { padding: 24px 16px; }
+
+      .cases-section .section-head { padding: 32px 16px 20px; }
+      .case-card { padding: 0 16px 32px; }
     }
   </style>
 </head>
@@ -991,18 +1013,17 @@
     <!-- LOGOS -->
     <div class="section-gap">
       <div class="glass glass--shadow-lg pad-logos">
-        <div class="logos-row">
-          <div class="logo-item">
-            <img src="Images/Logos/1.svg" alt="Logo">
-          </div>
-          <div class="logo-item">
-            <img src="Images/Logos/2.svg" alt="Logo">
-          </div>
-          <div class="logo-item">
-            <img src="Images/Logos/3.svg" alt="Logo">
-          </div>
-          <div class="logo-item">
-            <img src="Images/Logos/4.svg" alt="Logo">
+        <div class="logos-ticker">
+          <div class="logos-track">
+            <div class="logo-item"><img src="Images/Logos/1.svg" alt="Logo"></div>
+            <div class="logo-item"><img src="Images/Logos/2.svg" alt="Logo"></div>
+            <div class="logo-item"><img src="Images/Logos/3.svg" alt="Logo"></div>
+            <div class="logo-item"><img src="Images/Logos/4.svg" alt="Logo"></div>
+            <!-- duplicate set for seamless loop -->
+            <div class="logo-item"><img src="Images/Logos/1.svg" alt="" aria-hidden="true"></div>
+            <div class="logo-item"><img src="Images/Logos/2.svg" alt="" aria-hidden="true"></div>
+            <div class="logo-item"><img src="Images/Logos/3.svg" alt="" aria-hidden="true"></div>
+            <div class="logo-item"><img src="Images/Logos/4.svg" alt="" aria-hidden="true"></div>
           </div>
         </div>
       </div>
@@ -1276,56 +1297,57 @@
       </div>
     </div>
 
-    <!-- CASE STUDIES -->
-    <div class="section-gap">
-      <div class="glass pad-section">
-        <div class="section-head">
-          <h2 class="section-title">Case Studies</h2>
-        </div>
-        <div class="case-scroll-wrap">
-          <div class="case-scroll">
-            <div class="case-card">
-              <div class="case-img">
-                <img src="Images/Cases/Riskiiit.jpg" alt="Riskiiit case study">
-              </div>
-              <div>
-                <div class="case-title">Riskiiit</div>
-                <div class="case-subtitle">Branding + UI/UX + Content</div>
-              </div>
-            </div>
-            <div class="case-card">
-              <div class="case-img">
-                <img src="Images/Cases/FDF.jpg" alt="Football.fun case study">
-              </div>
-              <div>
-                <div class="case-title">Football.fun</div>
-                <div class="case-subtitle">UI/UX + Content</div>
-              </div>
-            </div>
-            <div class="case-card">
-              <div class="case-img">
-                <img src="Images/Cases/Corner.jpg" alt="Sandbox (Corners) case study">
-              </div>
-              <div>
-                <div class="case-title">Sandbox (Corners)</div>
-                <div class="case-subtitle">Branding + UI/UX</div>
-              </div>
-            </div>
-            <div class="case-card">
-              <div class="case-img">
-                <img src="Images/Cases/Blixt.jpg" alt="Blixt case study">
-              </div>
-              <div>
-                <div class="case-title">Blixt</div>
-                <div class="case-subtitle">UI/UX</div>
-              </div>
-            </div>
-          </div>
-        </div>
+  </div><!-- /container -->
+</div><!-- /page-wrap -->
+
+<!-- CASE STUDIES (full-width) -->
+<div class="section-gap cases-section glass">
+  <div class="section-head">
+    <h2 class="section-title">Case Studies</h2>
+  </div>
+  <div class="case-scroll">
+    <div class="case-card">
+      <div class="case-img">
+        <img src="Images/Cases/Riskiiit.jpg" alt="Riskiiit case study">
+      </div>
+      <div>
+        <div class="case-title">Riskiiit</div>
+        <div class="case-subtitle">Branding + UI/UX + Content</div>
       </div>
     </div>
+    <div class="case-card">
+      <div class="case-img">
+        <img src="Images/Cases/FDF.jpg" alt="Football.fun case study">
+      </div>
+      <div>
+        <div class="case-title">Football.fun</div>
+        <div class="case-subtitle">UI/UX + Content</div>
+      </div>
+    </div>
+    <div class="case-card">
+      <div class="case-img">
+        <img src="Images/Cases/Corner.jpg" alt="Sandbox (Corners) case study">
+      </div>
+      <div>
+        <div class="case-title">Sandbox (Corners)</div>
+        <div class="case-subtitle">Branding + UI/UX</div>
+      </div>
+    </div>
+    <div class="case-card">
+      <div class="case-img">
+        <img src="Images/Cases/Blixt.jpg" alt="Blixt case study">
+      </div>
+      <div>
+        <div class="case-title">Blixt</div>
+        <div class="case-subtitle">UI/UX</div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <!-- THANK YOU -->
+<!-- THANK YOU -->
+<div class="page-wrap">
+  <div class="container">
     <div class="section-gap">
       <div class="glass pad-ty thank-you">
         <div class="ty-images" aria-hidden="true">
