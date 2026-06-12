@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Retainer Proposal — Polify</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'ShinGoPro';
+      src: url('fonts/AOTFShinGoProExLight.otf') format('opentype');
+      font-weight: 200;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'ShinGoPro';
+      src: url('fonts/AOTFShinGoProLight.otf') format('opentype');
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'ShinGoPro';
+      src: url('fonts/AOTFShinGoProRegular.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'ShinGoPro';
+      src: url('fonts/AOTFShinGoProMedium.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'ShinGoPro';
+      src: url('fonts/AOTFShinGoProDeBold.otf') format('opentype');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'ShinGoPro';
+      src: url('fonts/AOTFShinGoProBold.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'ShinGoPro';
+      src: url('fonts/AOTFShinGoProHeavy.otf') format('opentype');
+      font-weight: 800;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --font-display: 'Bebas Neue', 'Arial Black', sans-serif;
+      --font-heading: 'ShinGoPro', system-ui, sans-serif;
+      --font-body: 'Geist', system-ui, -apple-system, sans-serif;
+      --text: #000;
+      --text-60: rgba(0,0,0,0.6);
+      --text-39: rgba(0,0,0,0.39);
+      --text-20: rgba(0,0,0,0.2);
+      --card-bg: rgba(0,0,0,0.02);
+      --card-border: rgba(0,0,0,0.08);
+      --card-border-dark: rgba(0,0,0,0.14);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: #fff;
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── HERO ─────────────────────────────────── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: clamp(320px, 37vw, 531px);
+      overflow: hidden;
+      background: linear-gradient(to bottom, #898989 0%, rgba(255,255,255,0) 100%);
+    }
+
+    .hero-deco {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .hero-deco img {
+      position: absolute;
+      width: 130%;
+      left: -15%;
+      top: -20%;
+      opacity: 0.08;
+      transform: rotate(-90deg);
+      transform-origin: center center;
+    }
+
+    .hero-images {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(16px, 2vw, 28px);
+      padding-top: clamp(40px, 5.7vw, 82px);
+      pointer-events: none;
+    }
+
+    .hero-img {
+      border-radius: 20px;
+      overflow: hidden;
+      flex-shrink: 0;
+      mix-blend-mode: plus-lighter;
+    }
+
+    .hero-img img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-img--left {
+      width: clamp(100px, 15vw, 217px);
+      height: clamp(154px, 23vw, 332px);
+    }
+
+    .hero-img--right {
+      width: clamp(95px, 14.3vw, 206px);
+      height: clamp(154px, 23vw, 332px);
+      transform: scaleY(-1);
+    }
+
+    /* ─── PAGE LAYOUT ──────────────────────────── */
+    .page-wrap {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .container {
+      padding: 0 clamp(20px, 11.7vw, 169px);
+    }
+
+    .section-gap { margin-bottom: clamp(8px, 0.6vw, 8px); }
+
+    .glass {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(45px);
+      -webkit-backdrop-filter: blur(45px);
+      border-radius: 8px;
+    }
+
+    .glass--shadow-lg {}
+
+    .pad-section { padding: clamp(40px, 6.7vw, 96px) clamp(24px, 7.8vw, 112px); }
+    .pad-logos   { padding: clamp(16px, 1.7vw, 24px) clamp(24px, 7.8vw, 112px); }
+    .pad-stats   { padding: 40px; }
+    .pad-ty      { padding: clamp(32px, 2.8vw, 40px); }
+
+    /* ─── PROPOSAL HEADER ──────────────────────── */
+    .proposal-header {
+      text-align: center;
+      padding: clamp(32px, 5.6vw, 80px) 0 clamp(20px, 4.4vw, 64px);
+    }
+
+    .proposal-title {
+      font-family: var(--font-display);
+      font-size: clamp(52px, 9.4vw, 136px);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .proposal-subtitle {
+      font-size: clamp(13px, 1.4vw, 20px);
+      font-weight: 500;
+      color: var(--text-39);
+      letter-spacing: -0.02em;
+      text-transform: capitalize;
+    }
+
+    /* ─── STATS BAR ────────────────────────────── */
+    .stats-bar {
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 32px;
+      padding: 0 clamp(16px, 2.2vw, 32px);
+      flex-wrap: wrap;
+      gap: 0;
+    }
+
+    .stats-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: clamp(12px, 1.1vw, 16px) clamp(8px, 1.1vw, 16px);
+      flex: 1 0 80px;
+    }
+
+    .stats-label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: clamp(11px, 1.1vw, 16px);
+      font-weight: 500;
+      color: var(--text);
+      opacity: 0.5;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      text-transform: capitalize;
+    }
+
+    .stats-icon {
+      width: clamp(14px, 1.1vw, 20px);
+      height: clamp(14px, 1.1vw, 20px);
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .stats-value {
+      font-size: clamp(11px, 1.1vw, 16px);
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      text-transform: capitalize;
+    }
+
+    .stats-sep {
+      width: 1px;
+      background: var(--card-border);
+      align-self: stretch;
+      flex-shrink: 0;
+      margin: 12px 0;
+    }
+
+    /* ─── LOGOS TICKER ─────────────────────────── */
+    .logos-ticker {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .logos-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      animation: ticker-scroll 18s linear infinite;
+    }
+
+    .logos-track:hover { animation-play-state: paused; }
+
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .logo-item {
+      height: clamp(36px, 4.5vw, 64px);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 clamp(28px, 4vw, 56px);
+    }
+
+    .logo-item img {
+      height: 100%;
+      width: auto;
+      max-width: 200px;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ─── SECTION HEADER ───────────────────────── */
+    .section-head {
+      text-align: center;
+      margin-bottom: clamp(24px, 2.2vw, 32px);
+    }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-bottom: 4px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(24px, 2.8vw, 40px);
+      font-weight: 600;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .section-desc {
+      margin-top: 8px;
+      font-size: clamp(13px, 1.1vw, 16px);
+      font-weight: 500;
+      color: var(--text-39);
+      letter-spacing: -0.02em;
+      line-height: 1.5;
+      text-transform: capitalize;
+      max-width: 820px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ─── ABOUT SECTION ────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .about-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .stat-cards-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 32px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-align: center;
+      aspect-ratio: 1;
+    }
+
+    .stat-number {
+      font-family: var(--font-heading);
+      font-size: clamp(22px, 2.2vw, 32px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .stat-label {
+      font-size: clamp(12px, 1.1vw, 16px);
+      font-weight: 500;
+      color: var(--text-60);
+      letter-spacing: -0.02em;
+      text-transform: capitalize;
+    }
+
+    .studio-banner {
+      background: linear-gradient(to bottom, #b7b7b7, #f5f5f5);
+      border-radius: 40px;
+      flex: 1;
+      min-height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .studio-banner-text {
+      font-size: clamp(16px, 1.7vw, 24px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      text-align: center;
+      color: #000;
+      position: relative;
+      z-index: 1;
+      max-width: 300px;
+      line-height: 1.3;
+    }
+
+    .photo-card {
+      border-radius: 40px;
+      overflow: hidden;
+      flex: 1;
+      min-height: 160px;
+      position: relative;
+      background: rgba(0,0,0,0.04);
+    }
+
+    .photo-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .quote-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 32px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .quote-inner {
+      max-width: 318px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .quote-text {
+      font-size: clamp(15px, 1.7vw, 24px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.35;
+    }
+
+    .quote-byline { margin-top: 8px; }
+
+    .quote-author {
+      font-size: clamp(12px, 1.1vw, 16px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      text-transform: capitalize;
+      line-height: 1.4;
+    }
+
+    .quote-position { color: var(--text-60); }
+
+    /* ─── SCOPE OF WORK ────────────────────────── */
+    .accordion-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .accordion-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 32px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .accordion-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .accordion-title-group { flex: 1; }
+
+    .accordion-title {
+      font-family: var(--font-heading);
+      font-size: clamp(16px, 1.7vw, 24px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .accordion-desc {
+      font-size: clamp(12px, 1.1vw, 16px);
+      font-weight: 500;
+      color: var(--text-39);
+      letter-spacing: -0.02em;
+      text-transform: capitalize;
+      line-height: 1.5;
+    }
+
+    .accordion-chevron {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      opacity: 0.35;
+      transform: scaleY(-1);
+      margin-top: 2px;
+    }
+
+    .accordion-divider {
+      height: 1px;
+      background: var(--card-border);
+      margin: 0 -24px;
+    }
+
+    .accordion-body {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .scope-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-top: 4px;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .check-circle {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+
+    .check-circle svg {
+      width: 11px;
+      height: 11px;
+    }
+
+    .check-txt {
+      font-size: clamp(12px, 1.1vw, 16px);
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      text-transform: capitalize;
+      line-height: 1.5;
+    }
+
+    /* ─── RETAINER ─────────────────────────────── */
+    .retainer-section {
+      padding: 0 0 clamp(40px, 6.7vw, 96px);
+    }
+
+    .retainer-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 32px;
+      display: flex;
+      align-items: stretch;
+      overflow: hidden;
+    }
+
+    .retainer-img-wrap {
+      width: clamp(140px, 18.4vw, 265px);
+      flex-shrink: 0;
+      position: relative;
+      min-height: 180px;
+      background: rgba(0,0,0,0.04);
+    }
+
+    .retainer-img-wrap img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .retainer-content {
+      flex: 1;
+      padding: clamp(20px, 2.2vw, 32px);
+      display: flex;
+      align-items: center;
+    }
+
+    .retainer-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .retainer-item { display: flex; flex-direction: column; gap: 4px; }
+
+    .retainer-label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: clamp(12px, 1.1vw, 16px);
+      font-weight: 500;
+      opacity: 0.5;
+      letter-spacing: -0.02em;
+      text-transform: capitalize;
+    }
+
+    .retainer-label img { width: 16px; height: 16px; object-fit: contain; }
+
+    .retainer-value {
+      font-size: clamp(16px, 1.7vw, 24px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      text-transform: capitalize;
+    }
+
+    /* ─── CASE STUDIES ─────────────────────────── */
+    .cases-section {
+      padding-bottom: clamp(8px, 0.6vw, 8px);
+    }
+
+    .cases-section .section-head {
+      padding: clamp(40px, 6.7vw, 96px) clamp(16px, 11.7vw, 169px) clamp(24px, 2.2vw, 32px);
+      margin-bottom: 0;
+    }
+
+    .case-scroll {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .case-scroll::-webkit-scrollbar { display: none; }
+
+    .case-card {
+      flex-shrink: 0;
+      width: clamp(260px, 38.9vw, 560px);
+      padding: 0 0 clamp(40px, 6.7vw, 96px);
+      margin-left: clamp(16px, 11.7vw, 169px);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      scroll-snap-align: start;
+    }
+
+    .case-card:last-child {
+      margin-right: clamp(16px, 11.7vw, 169px);
+    }
+
+    .case-img {
+      width: 100%;
+      aspect-ratio: 560 / 400;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.06);
+      background: rgba(0,0,0,0.05);
+      position: relative;
+    }
+
+    .case-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .case-title {
+      font-size: clamp(15px, 1.7vw, 24px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      text-transform: capitalize;
+      line-height: 1.3;
+    }
+
+    .case-subtitle {
+      font-size: clamp(12px, 1.1vw, 16px);
+      font-weight: 500;
+      opacity: 0.4;
+      letter-spacing: -0.01em;
+      margin-top: 2px;
+      line-height: 1.5;
+    }
+
+    /* ─── THANK YOU ────────────────────────────── */
+    .thank-you {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .ty-images {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .ty-img {
+      border-radius: 16px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: rgba(0,0,0,0.06);
+    }
+
+    .ty-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ty-title {
+      font-family: var(--font-display);
+      font-size: clamp(44px, 9.4vw, 136px);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    /* ─── FOOTER ───────────────────────────────── */
+    .site-footer {
+      text-align: center;
+      padding: clamp(12px, 1.1vw, 16px);
+      font-size: clamp(12px, 1.1vw, 16px);
+      font-weight: 500;
+      color: var(--text-39);
+      letter-spacing: -0.02em;
+    }
+
+    /* ─── RESPONSIVE ───────────────────────────── */
+    @media (max-width: 900px) {
+      .about-grid,
+      .accordion-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .retainer-card { flex-direction: column; }
+
+      .retainer-img-wrap {
+        width: 100%;
+        height: 220px;
+        min-height: unset;
+      }
+
+      .stats-bar {
+        justify-content: center;
+        gap: 0;
+      }
+
+      .stats-sep { display: none; }
+
+      .stats-item {
+        flex: 0 0 50%;
+        border-bottom: 1px solid var(--card-border);
+      }
+
+      .stats-item:nth-last-child(-n+2) {
+        border-bottom: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .stat-cards-row {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-img--left  { width: 85px;  height: 130px; }
+      .hero-img--right { width: 80px;  height: 130px; }
+
+      .accordion-card { padding: 20px; }
+      .accordion-divider { margin: 0 -20px; }
+
+      .stats-item { flex: 0 0 50%; }
+
+      .container { padding: 0 16px; }
+      .pad-section { padding: 32px 16px; }
+      .pad-logos   { padding: 16px; }
+      .pad-stats   { padding: 20px 16px; }
+      .pad-ty      { padding: 24px 16px; }
+
+      .cases-section .section-head { padding: 32px 16px 20px; }
+      .case-card { width: calc(100vw - 32px); margin-left: 16px; padding: 0 0 32px; }
+      .case-card:last-child { margin-right: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════ -->
+<section class="hero" aria-hidden="true">
+  <div class="hero-deco">
+    <img src="Images/Vector.svg" alt="">
+  </div>
+  <div class="hero-images">
+    <div class="hero-img hero-img--left">
+      <img src="Images/Gemini_Generated_Image_85whlm85whlm85wh 1.png" alt="">
+    </div>
+    <div class="hero-img hero-img--right">
+      <img src="Images/Gemini_Generated_Image_85whlm85whlm85wh 1.png" alt="">
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     PAGE CONTENT
+══════════════════════════════════════════════ -->
+<div class="page-wrap">
+  <div class="container">
+
+    <!-- HEADER -->
+    <header class="proposal-header">
+      <h1 class="proposal-title">Creative Retainer</h1>
+      <p class="proposal-subtitle">Graphic Design, UI/UX &amp; Video Production</p>
+    </header>
+
+    <!-- STATS BAR -->
+    <div class="section-gap">
+      <div class="glass pad-stats">
+        <div class="stats-bar">
+          <div class="stats-item">
+            <div class="stats-label">
+              <img class="stats-icon" src="Images/Icons/people, user, person, avatar.svg" alt="" aria-hidden="true">
+              Prepared by
+            </div>
+            <div class="stats-value">Polify</div>
+          </div>
+          <div class="stats-sep" aria-hidden="true"></div>
+          <div class="stats-item">
+            <div class="stats-label">
+              <img class="stats-icon" src="Images/Icons/fistbump, boom, hands, friends.svg" alt="" aria-hidden="true">
+              Partner
+            </div>
+            <div class="stats-value">Client</div>
+          </div>
+          <div class="stats-sep" aria-hidden="true"></div>
+          <div class="stats-item">
+            <div class="stats-label">
+              <img class="stats-icon" src="Images/Icons/sparkle-2, star, magic, ai.svg" alt="" aria-hidden="true">
+              Engagement Type
+            </div>
+            <div class="stats-value">Retainer</div>
+          </div>
+          <div class="stats-sep" aria-hidden="true"></div>
+          <div class="stats-item">
+            <div class="stats-label">
+              <img class="stats-icon" src="Images/Icons/hourglass.svg" alt="" aria-hidden="true">
+              Duration
+            </div>
+            <div class="stats-value">Ongoing</div>
+          </div>
+          <div class="stats-sep" aria-hidden="true"></div>
+          <div class="stats-item">
+            <div class="stats-label">
+              <img class="stats-icon" src="Images/Icons/calendar-clock, date-time.svg" alt="" aria-hidden="true">
+              Monthly Fee
+            </div>
+            <div class="stats-value">$10,000 USD</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOGOS -->
+    <div class="section-gap">
+      <div class="glass glass--shadow-lg pad-logos">
+        <div class="logos-ticker">
+          <div class="logos-track">
+            <div class="logo-item"><img src="Images/Logos/1.svg" alt="Logo"></div>
+            <div class="logo-item"><img src="Images/Logos/2.svg" alt="Logo"></div>
+            <div class="logo-item"><img src="Images/Logos/3.svg" alt="Logo"></div>
+            <div class="logo-item"><img src="Images/Logos/4.svg" alt="Logo"></div>
+            <div class="logo-item"><img src="Images/Logos/1.svg" alt="" aria-hidden="true"></div>
+            <div class="logo-item"><img src="Images/Logos/2.svg" alt="" aria-hidden="true"></div>
+            <div class="logo-item"><img src="Images/Logos/3.svg" alt="" aria-hidden="true"></div>
+            <div class="logo-item"><img src="Images/Logos/4.svg" alt="" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT POLIFY -->
+    <div class="section-gap">
+      <div class="glass pad-section">
+        <div class="section-head">
+          <h2 class="section-title">About Polify</h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-col">
+            <div class="stat-cards-row">
+              <div class="stat-card">
+                <div class="stat-number">110+</div>
+                <div class="stat-label">Businesses helped</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Team size</div>
+              </div>
+            </div>
+            <div class="studio-banner">
+              <p class="studio-banner-text">Not your average design studio. Driving creative growth in Web3</p>
+            </div>
+          </div>
+          <div class="about-col">
+            <div class="photo-card" style="min-height: 200px;">
+              <img src="Images/polifyposter.png" alt="Polify work">
+            </div>
+            <div class="quote-card">
+              <div class="quote-inner">
+                <p class="quote-text">"Polify is the fastest web3 agency with the highest quality, no question!"</p>
+                <div class="quote-byline">
+                  <p class="quote-author">Varun</p>
+                  <p class="quote-author quote-position">CEO Bloomfi</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCOPE OF WORK -->
+    <div class="section-gap">
+      <div class="glass pad-section">
+        <div class="section-head">
+          <p class="section-eyebrow">Polify × Client</p>
+          <h2 class="section-title">Scope of Work</h2>
+          <p class="section-desc">Polify functions as an extension of your team, delivering continuous creative support across graphic design, product design, and video production — maintaining consistency across every brand touchpoint.</p>
+        </div>
+
+        <div class="accordion-grid">
+
+          <!-- Card 1: Graphic Design -->
+          <div class="accordion-card">
+            <div class="accordion-top">
+              <div class="accordion-title-group">
+                <div class="accordion-title">Graphic Design</div>
+                <div class="accordion-desc">Ongoing design support for marketing, social media, campaigns, presentations, and all other creative needs.</div>
+              </div>
+              <svg class="accordion-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M5 8l5 5 5-5"/>
+              </svg>
+            </div>
+            <div class="accordion-divider"></div>
+            <div class="accordion-body">
+              <div class="scope-label">Includes</div>
+              <div class="check-row">
+                <div class="check-circle">
+                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+                </div>
+                <span class="check-txt">Unlimited graphic design requests</span>
+              </div>
+              <div class="check-row">
+                <div class="check-circle">
+                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+                </div>
+                <span class="check-txt">Unlimited revisions</span>
+              </div>
+              <div class="check-row">
+                <div class="check-circle">
+                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+                </div>
+                <span class="check-txt">Fast turnaround times</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: UI/UX Design -->
+          <div class="accordion-card">
+            <div class="accordion-top">
+              <div class="accordion-title-group">
+                <div class="accordion-title">UI/UX Design</div>
+                <div class="accordion-desc">Continuous design support for websites, landing pages, products, and digital experiences.</div>
+              </div>
+              <svg class="accordion-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M5 8l5 5 5-5"/>
+              </svg>
+            </div>
+            <div class="accordion-divider"></div>
+            <div class="accordion-body">
+              <div class="scope-label">Includes</div>
+              <div class="check-row">
+                <div class="check-circle">
+                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+                </div>
+                <span class="check-txt">Unlimited UI/UX design requests</span>
+              </div>
+              <div class="check-row">
+                <div class="check-circle">
+                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+                </div>
+                <span class="check-txt">Unlimited revisions</span>
+              </div>
+              <div class="check-row">
+                <div class="check-circle">
+                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+                </div>
+                <span class="check-txt">Design iterations and improvements</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Video Production -->
+          <div class="accordion-card">
+            <div class="accordion-top">
+              <div class="accordion-title-group">
+                <div class="accordion-title">Video Production</div>
+                <div class="accordion-desc">Consistent video creation to support marketing, product communication, and brand storytelling.</div>
+              </div>
+              <svg class="accordion-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M5 8l5 5 5-5"/>
+              </svg>
+            </div>
+            <div class="accordion-divider"></div>
+            <div class="accordion-body">
+              <div class="scope-label">Deliverables</div>
+              <div class="check-row">
+                <div class="check-circle">
+                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+                </div>
+                <span class="check-txt">2 long-form videos (30–45s, high-end production) per month</span>
+              </div>
+              <div class="check-row">
+                <div class="check-circle">
+                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+                </div>
+                <span class="check-txt">Or 4 short-form videos (10–20s) per month</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- RETAINER STRUCTURE -->
+    <div class="section-gap retainer-section">
+      <div class="section-head">
+        <h2 class="section-title">Retainer Structure</h2>
+      </div>
+      <div class="retainer-card">
+        <div class="retainer-img-wrap">
+          <img src="Images/polifyposter.png" alt="">
+        </div>
+        <div class="retainer-content">
+          <div class="retainer-info">
+            <div class="retainer-item">
+              <div class="retainer-label">
+                <svg style="width:16px;height:16px;flex-shrink:0" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="5" width="14" height="12" rx="1.5"/><path d="M3 9h14M7 3v4M13 3v4"/></svg>
+                Billing
+              </div>
+              <div class="retainer-value">Monthly, paid in advance</div>
+            </div>
+            <div class="retainer-item">
+              <div class="retainer-label">
+                <img src="Images/Icons/calendar-clock, date-time.svg" style="width:16px;height:16px;flex-shrink:0;opacity:0.5" alt="" aria-hidden="true">
+                Monthly Fee
+              </div>
+              <div class="retainer-value">$10,000 USD</div>
+            </div>
+            <div class="retainer-item">
+              <div class="retainer-label">
+                <img src="Images/Icons/hourglass.svg" style="width:16px;height:16px;flex-shrink:0;opacity:0.5" alt="" aria-hidden="true">
+                Commitment
+              </div>
+              <div class="retainer-value">Ongoing</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /container -->
+</div><!-- /page-wrap -->
+
+<!-- CASE STUDIES (full-width) -->
+<div class="section-gap cases-section glass">
+  <div class="section-head">
+    <h2 class="section-title">Case Studies</h2>
+  </div>
+  <div class="case-scroll">
+    <div class="case-card">
+      <div class="case-img">
+        <img src="Images/Cases/Riskiiit.jpg" alt="Riskiiit case study">
+      </div>
+      <div>
+        <div class="case-title">Riskiiit</div>
+        <div class="case-subtitle">Branding + UI/UX + Content</div>
+      </div>
+    </div>
+    <div class="case-card">
+      <div class="case-img">
+        <img src="Images/Cases/FDF.jpg" alt="Football.fun case study">
+      </div>
+      <div>
+        <div class="case-title">Football.fun</div>
+        <div class="case-subtitle">UI/UX + Content</div>
+      </div>
+    </div>
+    <div class="case-card">
+      <div class="case-img">
+        <img src="Images/Cases/Corner.jpg" alt="Sandbox (Corners) case study">
+      </div>
+      <div>
+        <div class="case-title">Sandbox (Corners)</div>
+        <div class="case-subtitle">Branding + UI/UX</div>
+      </div>
+    </div>
+    <div class="case-card">
+      <div class="case-img">
+        <img src="Images/Cases/Blixt.jpg" alt="Blixt case study">
+      </div>
+      <div>
+        <div class="case-title">Blixt</div>
+        <div class="case-subtitle">UI/UX</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- THANK YOU -->
+<div class="page-wrap">
+  <div class="container">
+    <div class="section-gap">
+      <div class="glass pad-ty thank-you">
+        <div class="ty-images" aria-hidden="true">
+          <div class="ty-img" style="width:clamp(60px,7.7vw,111px);height:clamp(56px,7.5vw,108px)">
+            <img src="Images/Gemini_Generated_Image_85whlm85whlm85wh 1.png" alt="">
+          </div>
+          <div class="ty-img" style="width:clamp(64px,8.3vw,119px);height:clamp(56px,7.5vw,108px)">
+            <img src="Images/Gemini_Generated_Image_85whlm85whlm85wh 1.png" alt="">
+          </div>
+          <div class="ty-img" style="width:clamp(63px,8.2vw,118px);height:clamp(59px,7.9vw,114px)">
+            <img src="Images/Gemini_Generated_Image_85whlm85whlm85wh 1.png" alt="">
+          </div>
+          <div class="ty-img" style="width:clamp(62px,8vw,115px);height:clamp(59px,7.9vw,114px)">
+            <img src="Images/Gemini_Generated_Image_85whlm85whlm85wh 1.png" alt="">
+          </div>
+        </div>
+        <h2 class="ty-title">Thank you!</h2>
+      </div>
+    </div>
+
+  </div><!-- /container -->
+</div><!-- /page-wrap -->
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <time datetime="2026-06-12">June 12, 2026</time>
+</footer>
+
+</body>
+</html>
