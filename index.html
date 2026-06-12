@@ -774,12 +774,17 @@
 
     .case-card {
       flex-shrink: 0;
-      width: 100vw;
-      padding: 0 clamp(16px, 11.7vw, 169px) clamp(40px, 6.7vw, 96px);
+      width: clamp(260px, 38.9vw, 560px);
+      padding: 0 0 clamp(40px, 6.7vw, 96px);
+      margin-left: clamp(16px, 11.7vw, 169px);
       display: flex;
       flex-direction: column;
       gap: 14px;
       scroll-snap-align: start;
+    }
+
+    .case-card:last-child {
+      margin-right: clamp(16px, 11.7vw, 169px);
     }
 
     .case-img {
@@ -928,7 +933,8 @@
       .pad-ty      { padding: 24px 16px; }
 
       .cases-section .section-head { padding: 32px 16px 20px; }
-      .case-card { padding: 0 16px 32px; }
+      .case-card { width: calc(100vw - 32px); margin-left: 16px; padding: 0 0 32px; }
+      .case-card:last-child { margin-right: 16px; }
     }
   </style>
 </head>
