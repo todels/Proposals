@@ -474,6 +474,19 @@
       gap: 20px;
     }
 
+    .deliverables-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 32px;
+      padding: clamp(28px, 3.3vw, 48px);
+    }
+
+    .deliverables-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 32px;
+    }
+
     .accordion-top {
       display: flex;
       align-items: flex-start;
@@ -752,7 +765,8 @@
     /* ─── RESPONSIVE ───────────────────────────── */
     @media (max-width: 900px) {
       .about-grid,
-      .accordion-grid {
+      .accordion-grid,
+      .deliverables-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1045,6 +1059,82 @@
             </div>
           </div>
 
+        </div>
+      </div>
+    </div>
+
+    <!-- DELIVERABLES -->
+    <div class="section-gap">
+      <div class="glass pad-section">
+        <div class="section-head">
+          <p class="section-eyebrow">Polify × Ankhlabs</p>
+          <h2 class="section-title">Deliverables</h2>
+          <p class="section-desc">Everything included as part of the retainer, spanning creative, design, and content production.</p>
+        </div>
+
+        <div class="deliverables-card">
+          <div class="deliverables-grid">
+            <div class="check-row">
+              <div class="check-circle">
+                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+              </div>
+              <span class="check-txt">Marketing and campaign creative assets</span>
+            </div>
+            <div class="check-row">
+              <div class="check-circle">
+                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+              </div>
+              <span class="check-txt">Social media content and advertising creatives</span>
+            </div>
+            <div class="check-row">
+              <div class="check-circle">
+                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+              </div>
+              <span class="check-txt">Presentation and sales enablement materials</span>
+            </div>
+            <div class="check-row">
+              <div class="check-circle">
+                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+              </div>
+              <span class="check-txt">Brand and visual identity assets</span>
+            </div>
+            <div class="check-row">
+              <div class="check-circle">
+                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+              </div>
+              <span class="check-txt">Website and landing page design</span>
+            </div>
+            <div class="check-row">
+              <div class="check-circle">
+                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+              </div>
+              <span class="check-txt">Product UI/UX design and design improvements</span>
+            </div>
+            <div class="check-row">
+              <div class="check-circle">
+                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+              </div>
+              <span class="check-txt">Wireframes, prototypes, and design systems</span>
+            </div>
+            <div class="check-row">
+              <div class="check-circle">
+                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+              </div>
+              <span class="check-txt">Motion graphics and animated content</span>
+            </div>
+            <div class="check-row">
+              <div class="check-circle">
+                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+              </div>
+              <span class="check-txt">Promotional, product, and brand videos</span>
+            </div>
+            <div class="check-row">
+              <div class="check-circle">
+                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+              </div>
+              <span class="check-txt">Creative concepts, iterations, and design refinements</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
