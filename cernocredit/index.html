@@ -459,8 +459,8 @@
 
     /* ─── SCOPE OF WORK ────────────────────────── */
     .accordion-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      display: flex;
+      flex-direction: column;
       gap: 16px;
     }
 
@@ -468,10 +468,11 @@
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 32px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+      padding: clamp(28px, 3.3vw, 48px) clamp(28px, 3.3vw, 48px);
+      display: grid;
+      grid-template-columns: 1fr 1px 2fr;
+      gap: 0 clamp(28px, 3.3vw, 48px);
+      align-items: start;
     }
 
     .accordion-top {
@@ -485,15 +486,15 @@
 
     .accordion-title {
       font-family: var(--font-heading);
-      font-size: clamp(16px, 1.7vw, 24px);
+      font-size: clamp(20px, 2.2vw, 32px);
       font-weight: 600;
       letter-spacing: -0.02em;
       text-transform: uppercase;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .accordion-desc {
-      font-size: clamp(12px, 1.1vw, 16px);
+      font-size: clamp(13px, 1.1vw, 16px);
       font-weight: 500;
       color: var(--text-39);
       letter-spacing: -0.02em;
@@ -501,25 +502,19 @@
       line-height: 1.5;
     }
 
-    .accordion-chevron {
-      width: 28px;
-      height: 28px;
-      flex-shrink: 0;
-      opacity: 0.35;
-      transform: scaleY(-1);
-      margin-top: 2px;
-    }
+    .accordion-chevron { display: none; }
 
     .accordion-divider {
-      height: 1px;
+      width: 1px;
       background: var(--card-border);
-      margin: 0 -24px;
+      align-self: stretch;
+      margin: 0;
     }
 
     .accordion-body {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
 
     .scope-label {
@@ -754,9 +749,19 @@
 
     /* ─── RESPONSIVE ───────────────────────────── */
     @media (max-width: 900px) {
-      .about-grid,
-      .accordion-grid {
+      .about-grid {
         grid-template-columns: 1fr;
+      }
+
+      .accordion-card {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+      }
+
+      .accordion-divider {
+        width: auto;
+        height: 1px;
+        align-self: auto;
       }
 
       .retainer-card { flex-direction: column; }
