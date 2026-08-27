@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ankhlabs Proposal — Polify</title>
+  <title>Cerno Credit Proposal — Polify</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
@@ -457,10 +457,36 @@
 
     .quote-position { color: var(--text-60); }
 
+    /* ─── OPTION LABELS ────────────────────────── */
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .option-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--text);
+      color: #fff;
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    .option-price {
+      font-size: clamp(13px, 1.1vw, 16px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      opacity: 0.4;
+    }
+
     /* ─── SCOPE OF WORK ────────────────────────── */
     .accordion-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      display: flex;
+      flex-direction: column;
       gap: 16px;
     }
 
@@ -468,23 +494,11 @@
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 32px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .deliverables-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 32px;
-      padding: clamp(28px, 3.3vw, 48px);
-    }
-
-    .deliverables-grid {
+      padding: clamp(28px, 3.3vw, 48px) clamp(28px, 3.3vw, 48px);
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px 32px;
+      grid-template-columns: 1fr 1px 2fr;
+      gap: 0 clamp(28px, 3.3vw, 48px);
+      align-items: start;
     }
 
     .accordion-top {
@@ -498,15 +512,16 @@
 
     .accordion-title {
       font-family: var(--font-heading);
-      font-size: clamp(16px, 1.7vw, 24px);
+      font-size: clamp(16px, 1.6vw, 24px);
       font-weight: 600;
       letter-spacing: -0.02em;
       text-transform: uppercase;
+      line-height: 1.1;
       margin-bottom: 6px;
     }
 
     .accordion-desc {
-      font-size: clamp(12px, 1.1vw, 16px);
+      font-size: clamp(13px, 1.1vw, 16px);
       font-weight: 500;
       color: var(--text-39);
       letter-spacing: -0.02em;
@@ -514,25 +529,19 @@
       line-height: 1.5;
     }
 
-    .accordion-chevron {
-      width: 28px;
-      height: 28px;
-      flex-shrink: 0;
-      opacity: 0.35;
-      transform: scaleY(-1);
-      margin-top: 2px;
-    }
+    .accordion-chevron { display: none; }
 
     .accordion-divider {
-      height: 1px;
+      width: 1px;
       background: var(--card-border);
-      margin: 0 -24px;
+      align-self: stretch;
+      margin: 0;
     }
 
     .accordion-body {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
 
     .scope-label {
@@ -691,8 +700,10 @@
     .case-img img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      object-position: center center;
       display: block;
+      background: #f5f5f5;
     }
 
     .case-title {
@@ -734,12 +745,13 @@
       border-radius: 16px;
       overflow: hidden;
       flex-shrink: 0;
+      background: rgba(0,0,0,0.06);
     }
 
     .ty-img img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       display: block;
     }
 
@@ -764,10 +776,19 @@
 
     /* ─── RESPONSIVE ───────────────────────────── */
     @media (max-width: 900px) {
-      .about-grid,
-      .accordion-grid,
-      .deliverables-grid {
+      .about-grid {
         grid-template-columns: 1fr;
+      }
+
+      .accordion-card {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+      }
+
+      .accordion-divider {
+        width: auto;
+        height: 1px;
+        align-self: auto;
       }
 
       .retainer-card { flex-direction: column; }
@@ -819,19 +840,12 @@
       .case-card:last-child { margin-right: 16px; }
     }
   </style>
-  <script src="../gate.js"></script>
 </head>
 <body>
 
 <!-- ══════════════════════════════════════════════
-     HERO
+     HERO — BLUEPRINT ILLUSTRATION
 ══════════════════════════════════════════════ -->
-<section class="hero" aria-hidden="true">
-  <div class="hero-deco">
-    <img src="../Images/Vector.svg" alt="">
-  </div>
-</section>
-
 <!-- ══════════════════════════════════════════════
      PAGE CONTENT
 ══════════════════════════════════════════════ -->
@@ -840,9 +854,88 @@
 
     <!-- HEADER -->
     <header class="proposal-header">
-      <img src="../Images/Logos/ankhlabs.png" alt="Ankhlabs" style="width:clamp(64px,7vw,100px);margin-bottom:20px;display:block;margin-left:auto;margin-right:auto;">
+      <div aria-hidden="true" style="width:100%;overflow:hidden;display:block;line-height:0;margin-bottom:clamp(24px,3vw,48px);">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" style="width:100%;display:block;">
+          <defs>
+            <marker id="ae" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#2a2a2a"/></marker>
+            <marker id="as" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto"><polygon points="7 0,0 2.5,7 5" fill="#2a2a2a"/></marker>
+          </defs>
+
+          <!-- Extension lines for width dimension -->
+          <line x1="310" y1="418" x2="310" y2="458" stroke="#333" stroke-width="0.8"/>
+          <line x1="890" y1="418" x2="890" y2="458" stroke="#333" stroke-width="0.8"/>
+          <line x1="316" y1="452" x2="884" y2="452" stroke="#333" stroke-width="0.9" marker-start="url(#as)" marker-end="url(#ae)"/>
+          <rect x="556" y="441" width="88" height="16" fill="#fff"/>
+          <text x="600" y="453" text-anchor="middle" font-family="'Courier New',monospace" font-size="11.5" fill="#2a2a2a">85.60 mm</text>
+
+          <!-- Extension lines for height dimension -->
+          <line x1="310" y1="95" x2="272" y2="95" stroke="#333" stroke-width="0.8"/>
+          <line x1="310" y1="415" x2="272" y2="415" stroke="#333" stroke-width="0.8"/>
+          <line x1="278" y1="101" x2="278" y2="409" stroke="#333" stroke-width="0.9" marker-start="url(#as)" marker-end="url(#ae)"/>
+          <g transform="translate(272,255) rotate(-90)">
+            <rect x="-22" y="-9" width="44" height="16" fill="#fff"/>
+            <text x="0" y="4" text-anchor="middle" font-family="'Courier New',monospace" font-size="11.5" fill="#2a2a2a">54 mm</text>
+          </g>
+
+          <!-- Card outline -->
+          <rect x="310" y="95" width="580" height="320" rx="22" ry="22" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+
+          <!-- Corner radius leader -->
+          <path d="M310 117 A22 22 0 0 1 332 95" fill="none" stroke="#888" stroke-width="0.8" stroke-dasharray="3 3"/>
+          <line x1="319" y1="104" x2="265" y2="65" stroke="#777" stroke-width="0.7"/>
+          <text x="260" y="62" text-anchor="end" font-family="'Courier New',monospace" font-size="10.5" fill="#555">R 3.18mm</text>
+
+          <!-- Thickness marker top-left -->
+          <line x1="294" y1="95" x2="294" y2="104" stroke="#333" stroke-width="0.8" marker-start="url(#as)" marker-end="url(#ae)"/>
+          <line x1="294" y1="100" x2="258" y2="80" stroke="#777" stroke-width="0.65"/>
+          <text x="254" y="78" text-anchor="end" font-family="'Courier New',monospace" font-size="10" fill="#555">0.76mm</text>
+
+          <!-- Chip -->
+          <rect x="358" y="192" width="56" height="44" rx="5" fill="none" stroke="#1a1a1a" stroke-width="1.4"/>
+          <line x1="358" y1="207" x2="414" y2="207" stroke="#1a1a1a" stroke-width="0.6"/>
+          <line x1="358" y1="221" x2="414" y2="221" stroke="#1a1a1a" stroke-width="0.6"/>
+          <line x1="374" y1="192" x2="374" y2="236" stroke="#1a1a1a" stroke-width="0.6"/>
+          <line x1="398" y1="192" x2="398" y2="236" stroke="#1a1a1a" stroke-width="0.6"/>
+          <rect x="375" y="208" width="23" height="12" rx="2" fill="none" stroke="#1a1a1a" stroke-width="0.8"/>
+          <!-- Chip leader -->
+          <line x1="386" y1="192" x2="386" y2="168" stroke="#888" stroke-width="0.65" stroke-dasharray="3 3"/>
+          <text x="330" y="164" font-family="'Courier New',monospace" font-size="10" fill="#555">15×11mm</text>
+
+          <!-- NFC -->
+          <g transform="translate(830,128)" fill="none" stroke="#1a1a1a" stroke-linecap="round">
+            <path d="M-8,9 Q-4,0 -4,-9" stroke-width="1.5"/>
+            <path d="M1,13 Q9,0 9,-13" stroke-width="1.5"/>
+            <path d="M10,17 Q22,0 22,-17" stroke-width="1.5"/>
+          </g>
+          <line x1="851" y1="112" x2="920" y2="82" stroke="#888" stroke-width="0.65" stroke-dasharray="3 3"/>
+          <text x="925" y="80" font-family="'Courier New',monospace" font-size="10" fill="#555">NFC</text>
+
+          <!-- cerno. wordmark -->
+          <text x="356" y="152" font-family="'Arial Black','Helvetica Neue',sans-serif" font-weight="900" font-size="21" fill="#1a1a1a" letter-spacing="-0.5">cerno</text>
+          <text x="466" y="152" font-family="'Arial Black','Helvetica Neue',sans-serif" font-weight="900" font-size="21" fill="#1a33ff">.</text>
+
+          <!-- Card number dots -->
+          <g fill="#1a1a1a" opacity="0.4">
+            <circle cx="358" cy="314" r="3.5"/><circle cx="371" cy="314" r="3.5"/><circle cx="384" cy="314" r="3.5"/><circle cx="397" cy="314" r="3.5"/>
+            <circle cx="420" cy="314" r="3.5"/><circle cx="433" cy="314" r="3.5"/><circle cx="446" cy="314" r="3.5"/><circle cx="459" cy="314" r="3.5"/>
+            <circle cx="482" cy="314" r="3.5"/><circle cx="495" cy="314" r="3.5"/><circle cx="508" cy="314" r="3.5"/><circle cx="521" cy="314" r="3.5"/>
+          </g>
+          <text x="546" y="320" font-family="'Courier New',monospace" font-size="13" fill="#1a1a1a" opacity="0.55" letter-spacing="3">4 2 0 2</text>
+
+          <!-- Centre crosshair -->
+          <line x1="596" y1="255" x2="604" y2="255" stroke="#888" stroke-width="1"/>
+          <line x1="600" y1="251" x2="600" y2="259" stroke="#888" stroke-width="1"/>
+          <circle cx="600" cy="255" r="5" fill="none" stroke="#888" stroke-width="0.9"/>
+        </svg>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:4px;margin-bottom:20px;" aria-label="Cerno Credit">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60" style="height:clamp(40px,5vw,64px);width:auto;" aria-hidden="true">
+          <text x="0" y="50" font-family="'Arial Black', 'Helvetica Neue', sans-serif" font-weight="900" font-size="56" fill="#000" letter-spacing="-2">cerno</text>
+          <text x="196" y="50" font-family="'Arial Black', 'Helvetica Neue', sans-serif" font-weight="900" font-size="56" fill="#1a3fff">.</text>
+        </svg>
+      </div>
       <h1 class="proposal-title">Creative Retainer</h1>
-      <p class="proposal-subtitle">Graphic Design, UI/UX &amp; Video Production</p>
+      <p class="proposal-subtitle">Graphic Design, Video Production &amp; UI/UX</p>
     </header>
 
     <!-- STATS BAR -->
@@ -851,7 +944,7 @@
         <div class="stats-bar">
           <div class="stats-item">
             <div class="stats-label">
-              <img class="stats-icon" src="../Images/Icons/people, user, person, avatar.svg" alt="" aria-hidden="true">
+              <svg class="stats-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10" cy="7" r="3"/><path d="M3 18c0-3.866 3.134-7 7-7s7 3.134 7 7"/></svg>
               Prepared by
             </div>
             <div class="stats-value">Polify</div>
@@ -859,15 +952,15 @@
           <div class="stats-sep" aria-hidden="true"></div>
           <div class="stats-item">
             <div class="stats-label">
-              <img class="stats-icon" src="../Images/Icons/fistbump, boom, hands, friends.svg" alt="" aria-hidden="true">
+              <svg class="stats-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6.5 10c0 0 .5-2 3.5-2s3.5 2 3.5 2"/><path d="M3 7.5C3 6 4.5 5 6 5.5l1 .5M17 7.5C17 6 15.5 5 14 5.5l-1 .5"/><path d="M6.5 10l-3 2.5a2 2 0 0 0 2.8 2.8L8 14M13.5 10l3 2.5a2 2 0 0 1-2.8 2.8L12 14"/><path d="M8 14s.5 2 2 2 2-2 2-2"/></svg>
               Partner
             </div>
-            <div class="stats-value">Ankhlabs</div>
+            <div class="stats-value">Cerno Credit</div>
           </div>
           <div class="stats-sep" aria-hidden="true"></div>
           <div class="stats-item">
             <div class="stats-label">
-              <img class="stats-icon" src="../Images/Icons/sparkle-2, star, magic, ai.svg" alt="" aria-hidden="true">
+              <svg class="stats-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M10 2l1.5 4.5H16l-3.5 2.5 1.5 4.5L10 11l-4 2.5 1.5-4.5L4 6.5h4.5z"/></svg>
               Engagement Type
             </div>
             <div class="stats-value">Retainer</div>
@@ -875,16 +968,16 @@
           <div class="stats-sep" aria-hidden="true"></div>
           <div class="stats-item">
             <div class="stats-label">
-              <img class="stats-icon" src="../Images/Icons/hourglass.svg" alt="" aria-hidden="true">
+              <svg class="stats-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 3h10M5 17h10M6 3v3.5c0 1 .5 2 1.5 2.5L10 10l-2.5 1c-1 .5-1.5 1.5-1.5 2.5V17M14 3v3.5c0 1-.5 2-1.5 2.5L10 10l2.5 1c1 .5 1.5 1.5 1.5 2.5V17"/></svg>
               Duration
             </div>
-            <div class="stats-value">Ongoing</div>
+            <div class="stats-value">2 Months</div>
           </div>
           <div class="stats-sep" aria-hidden="true"></div>
           <div class="stats-item">
             <div class="stats-label">
-              <img class="stats-icon" src="../Images/Icons/calendar-clock, date-time.svg" alt="" aria-hidden="true">
-              Monthly Fee
+              <svg class="stats-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="5" width="14" height="12" rx="1.5"/><path d="M3 9h14M7 3v4M13 3v4"/></svg>
+              Total Investment
             </div>
             <div class="stats-value">$10,000 USD</div>
           </div>
@@ -892,19 +985,20 @@
       </div>
     </div>
 
+
     <!-- LOGOS -->
     <div class="section-gap">
       <div class="glass glass--shadow-lg pad-logos">
         <div class="logos-ticker">
           <div class="logos-track">
-            <div class="logo-item"><img src="../Images/Logos/1.svg" alt="Logo"></div>
-            <div class="logo-item"><img src="../Images/Logos/2.svg" alt="Logo"></div>
-            <div class="logo-item"><img src="../Images/Logos/3.svg" alt="Logo"></div>
-            <div class="logo-item"><img src="../Images/Logos/4.svg" alt="Logo"></div>
-            <div class="logo-item"><img src="../Images/Logos/1.svg" alt="" aria-hidden="true"></div>
-            <div class="logo-item"><img src="../Images/Logos/2.svg" alt="" aria-hidden="true"></div>
-            <div class="logo-item"><img src="../Images/Logos/3.svg" alt="" aria-hidden="true"></div>
-            <div class="logo-item"><img src="../Images/Logos/4.svg" alt="" aria-hidden="true"></div>
+            <div class="logo-item"><img src="rainbet.png" alt="Rainbet"></div>
+            <div class="logo-item"><img src="whop.png" alt="Whop"></div>
+            <div class="logo-item"><img src="bayc.png" alt="BAYC"></div>
+            <div class="logo-item"><img src="sandbox.png" alt="Sandbox"></div>
+            <div class="logo-item" aria-hidden="true"><img src="rainbet.png" alt=""></div>
+            <div class="logo-item" aria-hidden="true"><img src="whop.png" alt=""></div>
+            <div class="logo-item" aria-hidden="true"><img src="bayc.png" alt=""></div>
+            <div class="logo-item" aria-hidden="true"><img src="sandbox.png" alt=""></div>
           </div>
         </div>
       </div>
@@ -954,9 +1048,15 @@
     <div class="section-gap">
       <div class="glass pad-section">
         <div class="section-head">
-          <p class="section-eyebrow">Polify × Ankhlabs</p>
+          <p class="section-eyebrow">Polify × Cerno Credit</p>
           <h2 class="section-title">Scope of Work</h2>
           <p class="section-desc">Polify functions as an extension of your team, delivering continuous creative support across graphic design, product design, and video production — maintaining consistency across every brand touchpoint.</p>
+        </div>
+
+        <!-- Option 1 label -->
+        <div class="option-label">
+          <span class="option-tag">Option 1</span>
+          <span class="option-price">$10,000 / 2 months</span>
         </div>
 
         <div class="accordion-grid">
@@ -966,7 +1066,7 @@
             <div class="accordion-top">
               <div class="accordion-title-group">
                 <div class="accordion-title">Graphic Design</div>
-                <div class="accordion-desc">Ongoing design support for marketing, social media, campaigns, presentations, and all other creative needs.</div>
+                <div class="accordion-desc">Unlimited creative support for social media, marketing campaigns, presentations, and every brand touchpoint.</div>
               </div>
               <svg class="accordion-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                 <path d="M5 8l5 5 5-5"/>
@@ -991,151 +1091,159 @@
                 <div class="check-circle">
                   <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
                 </div>
-                <span class="check-txt">Fast turnaround times</span>
+                <span class="check-txt">Fast turnaround on all requests</span>
+              </div>
+              <div class="check-row">
+                <div class="check-circle">
+                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+                </div>
+                <span class="check-txt">Social assets, banners, decks &amp; more</span>
               </div>
             </div>
           </div>
 
-          <!-- Card 2: UI/UX Design -->
+          <!-- Card 2: Video Production -->
           <div class="accordion-card">
             <div class="accordion-top">
               <div class="accordion-title-group">
-                <div class="accordion-title">UI/UX Design</div>
-                <div class="accordion-desc">Continuous design support for websites, landing pages, products, and digital experiences.</div>
+                <div class="accordion-title">Video Production</div>
+                <div class="accordion-desc">High-quality produced videos each month to drive brand awareness, product communication, and audience engagement.</div>
               </div>
               <svg class="accordion-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                 <path d="M5 8l5 5 5-5"/>
               </svg>
+            </div>
+            <div class="accordion-divider"></div>
+            <div class="accordion-body">
+              <div class="scope-label">Deliverables per month</div>
+              <div class="check-row">
+                <div class="check-circle">
+                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+                </div>
+                <span class="check-txt">1–2 high-quality produced videos</span>
+              </div>
+              <div class="check-row">
+                <div class="check-circle">
+                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+                </div>
+                <span class="check-txt">Motion graphics, brand films &amp; social cuts</span>
+              </div>
+              <div class="check-row">
+                <div class="check-circle">
+                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+                </div>
+                <span class="check-txt">Revisions included</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: UI/UX (substitution) -->
+          <div class="accordion-card">
+            <div class="accordion-top">
+              <div class="accordion-title-group">
+                <div class="accordion-title">UI/UX Design</div>
+                <div class="accordion-desc">Flexible substitution — swap a video or graphics slot for UI/UX design work when your product needs it most.</div>
+              </div>
+              <svg class="accordion-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M5 8l5 5 5-5"/>
+              </svg>
+            </div>
+            <div class="accordion-divider"></div>
+            <div class="accordion-body">
+              <div class="scope-label">Substitution option</div>
+              <div class="check-row">
+                <div class="check-circle">
+                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+                </div>
+                <span class="check-txt">Replace 1 video or graphics block with UI/UX design</span>
+              </div>
+              <div class="check-row">
+                <div class="check-circle">
+                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+                </div>
+                <span class="check-txt">Websites, landing pages &amp; product screens</span>
+              </div>
+              <div class="check-row">
+                <div class="check-circle">
+                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+                </div>
+                <span class="check-txt">Flexible, decided month by month</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Option 2 label -->
+        <div class="option-label" style="margin-top:32px;">
+          <span class="option-tag">Option 2</span>
+          <span class="option-price">$7,000 / 2 months</span>
+        </div>
+
+        <div class="accordion-grid">
+
+          <!-- Option 2: Graphic Design -->
+          <div class="accordion-card">
+            <div class="accordion-top">
+              <div class="accordion-title-group">
+                <div class="accordion-title">Graphic Design</div>
+                <div class="accordion-desc">Unlimited creative support for social media, marketing campaigns, presentations, and every brand touchpoint.</div>
+              </div>
             </div>
             <div class="accordion-divider"></div>
             <div class="accordion-body">
               <div class="scope-label">Includes</div>
               <div class="check-row">
-                <div class="check-circle">
-                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
-                </div>
-                <span class="check-txt">Unlimited UI/UX design requests</span>
+                <div class="check-circle"><svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg></div>
+                <span class="check-txt">Unlimited graphic design requests</span>
               </div>
               <div class="check-row">
-                <div class="check-circle">
-                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
-                </div>
+                <div class="check-circle"><svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg></div>
                 <span class="check-txt">Unlimited revisions</span>
               </div>
               <div class="check-row">
-                <div class="check-circle">
-                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
-                </div>
-                <span class="check-txt">Design iterations and improvements</span>
+                <div class="check-circle"><svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg></div>
+                <span class="check-txt">Fast turnaround on all requests</span>
+              </div>
+              <div class="check-row">
+                <div class="check-circle"><svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg></div>
+                <span class="check-txt">Social assets, banners, decks &amp; more</span>
               </div>
             </div>
           </div>
 
-          <!-- Card 3: Video Production -->
+          <!-- Option 2: Short-Form Video -->
           <div class="accordion-card">
             <div class="accordion-top">
               <div class="accordion-title-group">
-                <div class="accordion-title">Video Production</div>
-                <div class="accordion-desc">Consistent video creation to support marketing, product communication, and brand storytelling.</div>
+                <div class="accordion-title">Short-Form Video</div>
+                <div class="accordion-desc">Two punchy, high-quality short-form videos per month built for social — no substitutions available for this tier.</div>
               </div>
-              <svg class="accordion-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                <path d="M5 8l5 5 5-5"/>
-              </svg>
             </div>
             <div class="accordion-divider"></div>
             <div class="accordion-body">
-              <div class="scope-label">Deliverables</div>
+              <div class="scope-label">Deliverables per month</div>
               <div class="check-row">
-                <div class="check-circle">
-                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
-                </div>
-                <span class="check-txt">2 long-form videos (30–45s, high-end production) per month</span>
+                <div class="check-circle"><svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg></div>
+                <span class="check-txt">2 short-form videos (10–15s)</span>
               </div>
               <div class="check-row">
-                <div class="check-circle">
-                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
+                <div class="check-circle"><svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg></div>
+                <span class="check-txt">High-quality production &amp; motion</span>
+              </div>
+              <div class="check-row">
+                <div class="check-circle"><svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg></div>
+                <span class="check-txt">Revisions included</span>
+              </div>
+              <div class="check-row" style="opacity:0.4;">
+                <div class="check-circle" style="border-color:rgba(0,0,0,0.15);">
+                  <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.25)" stroke-width="1.5"><path d="M2 2l7 7M9 2l-7 7"/></svg>
                 </div>
-                <span class="check-txt">Or 4 short-form videos (10–20s) per month</span>
+                <span class="check-txt">UI/UX design — not available on this tier</span>
               </div>
             </div>
           </div>
 
-        </div>
-      </div>
-    </div>
-
-    <!-- DELIVERABLES -->
-    <div class="section-gap">
-      <div class="glass pad-section">
-        <div class="section-head">
-          <p class="section-eyebrow">Polify × Ankhlabs</p>
-          <h2 class="section-title">Deliverables</h2>
-          <p class="section-desc">Everything included as part of the retainer, spanning creative, design, and content production.</p>
-        </div>
-
-        <div class="deliverables-card">
-          <div class="deliverables-grid">
-            <div class="check-row">
-              <div class="check-circle">
-                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
-              </div>
-              <span class="check-txt">Marketing and campaign creative assets</span>
-            </div>
-            <div class="check-row">
-              <div class="check-circle">
-                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
-              </div>
-              <span class="check-txt">Social media content and advertising creatives</span>
-            </div>
-            <div class="check-row">
-              <div class="check-circle">
-                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
-              </div>
-              <span class="check-txt">Presentation and sales enablement materials</span>
-            </div>
-            <div class="check-row">
-              <div class="check-circle">
-                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
-              </div>
-              <span class="check-txt">Brand and visual identity assets</span>
-            </div>
-            <div class="check-row">
-              <div class="check-circle">
-                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
-              </div>
-              <span class="check-txt">Website and landing page design</span>
-            </div>
-            <div class="check-row">
-              <div class="check-circle">
-                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
-              </div>
-              <span class="check-txt">Product UI/UX design and design improvements</span>
-            </div>
-            <div class="check-row">
-              <div class="check-circle">
-                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
-              </div>
-              <span class="check-txt">Wireframes, prototypes, and design systems</span>
-            </div>
-            <div class="check-row">
-              <div class="check-circle">
-                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
-              </div>
-              <span class="check-txt">Motion graphics and animated content</span>
-            </div>
-            <div class="check-row">
-              <div class="check-circle">
-                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
-              </div>
-              <span class="check-txt">Promotional, product, and brand videos</span>
-            </div>
-            <div class="check-row">
-              <div class="check-circle">
-                <svg viewBox="0 0 11 11" fill="none" stroke="rgba(0,0,0,0.4)" stroke-width="1.5"><path d="M2 5.5l2.5 2.5 4.5-4.5"/></svg>
-              </div>
-              <span class="check-txt">Creative concepts, iterations, and design refinements</span>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -1156,21 +1264,21 @@
                 <svg style="width:16px;height:16px;flex-shrink:0" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="5" width="14" height="12" rx="1.5"/><path d="M3 9h14M7 3v4M13 3v4"/></svg>
                 Billing
               </div>
-              <div class="retainer-value">Monthly, paid in advance</div>
+              <div class="retainer-value">$5,000 / month, paid in advance</div>
             </div>
             <div class="retainer-item">
               <div class="retainer-label">
                 <img src="../Images/Icons/calendar-clock, date-time.svg" style="width:16px;height:16px;flex-shrink:0;opacity:0.5" alt="" aria-hidden="true">
-                Monthly Fee
+                Total Investment
               </div>
               <div class="retainer-value">$10,000 USD</div>
             </div>
             <div class="retainer-item">
               <div class="retainer-label">
                 <img src="../Images/Icons/hourglass.svg" style="width:16px;height:16px;flex-shrink:0;opacity:0.5" alt="" aria-hidden="true">
-                Commitment
+                Duration
               </div>
-              <div class="retainer-value">Ongoing</div>
+              <div class="retainer-value">2 Months</div>
             </div>
           </div>
         </div>
@@ -1188,7 +1296,7 @@
   <div class="case-scroll">
     <div class="case-card">
       <div class="case-img">
-        <img src="../Images/Cases/Riskiiit.jpg" alt="Riskiiit case study">
+        <img src="Section Item Image2.png" alt="Riskiiit case study">
       </div>
       <div>
         <div class="case-title">Riskiiit</div>
@@ -1197,7 +1305,7 @@
     </div>
     <div class="case-card">
       <div class="case-img">
-        <img src="../Images/Cases/FDF.jpg" alt="Football.fun case study">
+        <img src="Section Item Image-1.png" alt="Football.fun case study">
       </div>
       <div>
         <div class="case-title">Football.fun</div>
@@ -1206,7 +1314,7 @@
     </div>
     <div class="case-card">
       <div class="case-img">
-        <img src="../Images/Cases/Corner.jpg" alt="Sandbox (Corners) case study">
+        <img src="Section Item Image-2.png" alt="Corners case study">
       </div>
       <div>
         <div class="case-title">Sandbox (Corners)</div>
@@ -1215,7 +1323,7 @@
     </div>
     <div class="case-card">
       <div class="case-img">
-        <img src="../Images/Cases/Blixt.jpg" alt="Blixt case study">
+        <img src="Section Item Image.png" alt="Blixt case study">
       </div>
       <div>
         <div class="case-title">Blixt</div>
@@ -1230,19 +1338,54 @@
   <div class="container">
     <div class="section-gap">
       <div class="glass pad-ty thank-you">
-        <div class="ty-images" aria-hidden="true">
-          <div class="ty-img" style="width:clamp(60px,7.7vw,111px);height:clamp(56px,7.5vw,108px)">
-            <img src="../Images/ankhlabs-wireframe.png" alt="">
-          </div>
-          <div class="ty-img" style="width:clamp(64px,8.3vw,119px);height:clamp(56px,7.5vw,108px)">
-            <img src="../Images/ankhlabs-wireframe.png" alt="">
-          </div>
-          <div class="ty-img" style="width:clamp(63px,8.2vw,118px);height:clamp(59px,7.9vw,114px)">
-            <img src="../Images/ankhlabs-wireframe.png" alt="">
-          </div>
-          <div class="ty-img" style="width:clamp(62px,8vw,115px);height:clamp(59px,7.9vw,114px)">
-            <img src="../Images/ankhlabs-wireframe.png" alt="">
-          </div>
+        <div aria-hidden="true" style="margin-bottom:clamp(16px,2vw,28px);perspective:1200px;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" style="width:clamp(260px,40vw,480px);height:auto;filter:drop-shadow(0 32px 64px rgba(0,0,0,0.22)) drop-shadow(0 8px 16px rgba(0,0,0,0.12));transform:rotate(-4deg);">
+            <defs>
+              <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1c1c1e"/>
+                <stop offset="100%" stop-color="#0a0a0b"/>
+              </linearGradient>
+              <linearGradient id="chipGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#c8a96e"/>
+                <stop offset="50%" stop-color="#e8cc8a"/>
+                <stop offset="100%" stop-color="#b8973e"/>
+              </linearGradient>
+              <radialGradient id="sheen" cx="30%" cy="25%" r="70%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.06"/>
+                <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <!-- Card body -->
+            <rect width="480" height="300" rx="24" fill="url(#cardGrad)"/>
+            <rect width="480" height="300" rx="24" fill="url(#sheen)"/>
+            <!-- Subtle edge highlight -->
+            <rect x="0.75" y="0.75" width="478.5" height="298.5" rx="23.5" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="1.5"/>
+            <!-- Chip -->
+            <g transform="translate(44,168)">
+              <rect width="48" height="38" rx="5" fill="url(#chipGrad)"/>
+              <line x1="0" y1="12" x2="48" y2="12" stroke="rgba(0,0,0,0.25)" stroke-width="0.8"/>
+              <line x1="0" y1="25" x2="48" y2="25" stroke="rgba(0,0,0,0.25)" stroke-width="0.8"/>
+              <line x1="14" y1="0" x2="14" y2="38" stroke="rgba(0,0,0,0.25)" stroke-width="0.8"/>
+              <line x1="34" y1="0" x2="34" y2="38" stroke="rgba(0,0,0,0.25)" stroke-width="0.8"/>
+              <rect x="14" y="12" width="20" height="13" rx="1.5" fill="rgba(0,0,0,0.15)"/>
+            </g>
+            <!-- NFC symbol -->
+            <g transform="translate(386,44)" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2.2" stroke-linecap="round">
+              <path d="M0 16 Q6 8 6 0"/>
+              <path d="M8 20 Q18 10 18 0"/>
+              <path d="M16 24 Q30 12 30 0"/>
+            </g>
+            <!-- cerno. wordmark -->
+            <text x="44" y="72" font-family="'Arial Black', 'Helvetica Neue', sans-serif" font-weight="900" font-size="28" fill="#ffffff" letter-spacing="-0.5">cerno</text>
+            <text x="158" y="72" font-family="'Arial Black', 'Helvetica Neue', sans-serif" font-weight="900" font-size="28" fill="#3355ff">.</text>
+            <!-- Card number dots -->
+            <g fill="rgba(255,255,255,0.3)">
+              <circle cx="44" cy="240" r="3.5"/><circle cx="56" cy="240" r="3.5"/><circle cx="68" cy="240" r="3.5"/><circle cx="80" cy="240" r="3.5"/>
+              <circle cx="104" cy="240" r="3.5"/><circle cx="116" cy="240" r="3.5"/><circle cx="128" cy="240" r="3.5"/><circle cx="140" cy="240" r="3.5"/>
+              <circle cx="164" cy="240" r="3.5"/><circle cx="176" cy="240" r="3.5"/><circle cx="188" cy="240" r="3.5"/><circle cx="200" cy="240" r="3.5"/>
+            </g>
+            <text x="228" y="246" font-family="'Courier New', monospace" font-size="14" fill="rgba(255,255,255,0.75)" letter-spacing="2">4 2 0 2</text>
+          </svg>
         </div>
         <h2 class="ty-title">Thank you!</h2>
       </div>
@@ -1253,7 +1396,7 @@
 
 <!-- FOOTER -->
 <footer class="site-footer">
-  <time datetime="2026-06-12">June 12, 2026</time>
+  <time datetime="2026-06-20">June 20, 2026</time>
 </footer>
 
 </body>
