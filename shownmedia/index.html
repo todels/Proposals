@@ -224,8 +224,14 @@
     }
 
     /* ─── CONCEPT IMAGE ───────────────────────── */
-    .concept { position: relative; overflow: hidden; }
-    .concept img { width: 100%; max-width: 1920px; height: auto; margin-inline: auto; }
+    /* Inset like Figma (97px margins at 1440) and never taller than the viewport, so the whole concept is visible at once */
+    .concept {
+      position: relative;
+      overflow: hidden;
+      width: min(100% - 2 * clamp(20px, 6.736vw, 97px), (100svh - 96px) * 1440 / 1024);
+      margin-inline: auto;
+    }
+    .concept img { width: 100%; height: auto; }
 
     /* ─── PROJECT GOAL ────────────────────────── */
     .goal__inner {
