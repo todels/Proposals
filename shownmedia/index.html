@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#000000">
+  <title>ShownMedia Landing Page Proposal | Polify</title>
+  <meta name="description" content="Landing page proposal and first idea for ShownMedia, presented by Polify.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Inter:ital,wght@0,500;1,400;1,500&display=swap" rel="stylesheet">
+  <script>document.documentElement.classList.add('js');</script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --font-geist: 'Geist', system-ui, -apple-system, sans-serif;
+      --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
+
+      --bg: #000;
+      --fg: #fff;
+      --fg-80: rgba(255, 255, 255, 0.8);
+      --fg-40: rgba(255, 255, 255, 0.4);
+      --fg-30: rgba(255, 255, 255, 0.3);
+      --fg-13: rgba(255, 255, 255, 0.13);
+
+      /* Figma frame is 1440 wide: 120 side padding, 1200 content, 348 | 160 | 692 columns */
+      --pad: clamp(20px, 8.333vw, 120px);
+      --gap: clamp(40px, 11.111vw, 160px);
+      --wrap-max: calc(1200px + 2 * var(--pad));
+      --cols: minmax(0, 348fr) minmax(0, 692fr);
+      --row-y: clamp(64px, 7.222vw, 104px);
+      --label-pad: clamp(0px, 6.111vw, 88px);
+      --line: 28px;
+
+      --ease: cubic-bezier(0.2, 0.65, 0.3, 1);
+    }
+
+    html { background: var(--bg); }
+
+    body {
+      background: var(--bg);
+      color: var(--fg-80);
+      font: 500 18px/var(--line) var(--font-geist);
+      letter-spacing: -0.02em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    h1, h2, h3 { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; border-radius: 2px; }
+    img { display: block; max-width: 100%; }
+    ::selection { background: var(--fg); color: var(--bg); }
+
+    /* Emphasis is brightness, not weight: muted text lifts to 80%, body text to white */
+    strong { font-weight: inherit; color: var(--fg); }
+    .muted { color: var(--fg-40); }
+    .muted strong { color: var(--fg-80); }
+
+    /* ─── LAYOUT ──────────────────────────────── */
+    .page { overflow-x: hidden; overflow-x: clip; }
+
+    .wrap {
+      width: 100%;
+      max-width: var(--wrap-max);
+      margin-inline: auto;
+      padding-inline: var(--pad);
+    }
+
+    .inter { font-family: var(--font-inter); }
+
+    .head {
+      font-size: clamp(28px, 2.778vw, 40px);
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      color: var(--fg-80);
+    }
+
+    /* ─── HERO ────────────────────────────────── */
+    .hero {
+      --hero-h: clamp(560px, 58.958vw, 849px);
+      position: relative;
+      height: var(--hero-h);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: clamp(56px, 11.528vw, 166px);
+      overflow: hidden;
+      color: var(--fg);
+    }
+
+    /* Warped grid, stretched with the hero so its fade always ends just above the bottom edge */
+    .hero__grid {
+      position: absolute;
+      left: 50%;
+      top: calc(var(--hero-h) * -0.48763);
+      width: max(1200px, 151.597vw);
+      max-width: none;
+      height: calc(var(--hero-h) * 2.24617);
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .topbar {
+      position: absolute;
+      top: 32px;
+      left: 32px;
+      right: 32px;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      line-height: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .topbar__logo svg { display: block; width: 44px; height: 22px; }
+
+    .topbar__links { display: flex; gap: 64px; }
+    .topbar__links a { opacity: 0.8; transition: opacity 0.2s ease; }
+    .topbar__links a:hover { opacity: 1; }
+
+    .topbar__note {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 164px;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      opacity: 0.5;
+    }
+
+    .hero__title {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 8px 40px;
+      padding-block: 32px;
+      font-weight: 400;
+    }
+
+    .hero__title h1 { font-size: 40px; line-height: 1; letter-spacing: -0.02em; }
+    .hero__title p { font-size: 20px; line-height: 28px; letter-spacing: -0.01em; color: rgba(255, 255, 255, 0.5); }
+
+    /* ─── INTRO ───────────────────────────────── */
+    .intro__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 64px;
+      padding-block: 72px;
+    }
+
+    .intro__lead { flex: 0 1 628px; line-height: 32px; color: var(--fg-40); }
+    .intro__lead--soft { color: rgba(255, 255, 255, 0.5); }
+    .intro__lead p + p { margin-top: 16px; }
+
+    /* ─── RATIONALE (after the concept image) ─── */
+    .rationale__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 64px;
+      padding-block: clamp(72px, 8.333vw, 120px);
+    }
+
+    .rationale__lead { flex: 0 1 628px; }
+    .rationale__lead .head { max-width: 479px; line-height: 1.2; margin-bottom: 16px; }
+    .rationale__lead .intro__lead { flex: none; }
+
+    .rationale__points { flex: 0 1 419px; }
+    .rationale__points h3 { color: var(--fg); margin-bottom: 24px; }
+    .rationale__points ul { list-style: none; }
+    .rationale__points li + li { margin-top: 16px; }
+    .rationale__points strong { color: var(--fg); }
+
+    /* ─── CUE (centered line + floor glow) ────── */
+    .cue {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      height: clamp(220px, 27.431vw, 395px);
+      padding-inline: var(--pad);
+      text-align: center;
+    }
+
+    .cue p { position: relative; }
+
+    /* Section edges: a hairline that peaks over the glow and fades out towards the sides */
+    .hairline::before, .hairline::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: radial-gradient(ellipse 50% 100% at 50% 50%, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0.3) 100%);
+      pointer-events: none;
+    }
+    .hairline--bottom::after { bottom: 0; }
+    .hairline--bottom::before, .hairline--top::after { display: none; }
+    .hairline--top::before { top: 0; }
+    .hairline--both::before { top: 0; }
+    .hairline--both::after { bottom: 0; }
+    .thanks::after { z-index: 1; }
+
+    .glow {
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      width: max(900px, 131.361vw);
+      max-width: none;
+      transform: translate(-50%, -46.95%);
+      pointer-events: none;
+    }
+
+    /* ─── CONCEPT IMAGE ───────────────────────── */
+    .concept { position: relative; overflow: hidden; }
+    .concept img { width: 100%; max-width: 1920px; height: auto; margin-inline: auto; }
+
+    /* ─── PROJECT GOAL ────────────────────────── */
+    .goal__inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      column-gap: var(--gap);
+      row-gap: 40px;
+      align-items: center;
+      min-height: clamp(0px, 55.972vw, 806px);
+      padding-block: var(--row-y);
+    }
+
+    .goal__eyebrow { color: var(--fg-40); margin-bottom: 16px; }
+    .goal__body p + p { margin-top: var(--line); }
+    .goal__body em { font-style: italic; font-weight: 400; }
+
+    /* ─── SEPARATOR ───────────────────────────── */
+    .sep {
+      display: grid;
+      grid-template-columns: var(--cols);
+      column-gap: var(--gap);
+    }
+
+    .sep span {
+      grid-column: 2;
+      width: 184px;
+      height: 1px;
+      background: var(--fg-30);
+      transform: scaleY(0.5);
+      transform-origin: left;
+    }
+
+    /* ─── LABELLED ROWS ───────────────────────── */
+    .row {
+      --label-y: 50%;
+      position: relative;
+    }
+
+    .row--top { --label-y: calc(var(--row-y) + var(--label-pad) + var(--line) / 2); }
+
+    .row__grid {
+      display: grid;
+      grid-template-columns: var(--cols);
+      column-gap: var(--gap);
+      row-gap: 28px;
+      align-items: center;
+      padding-block: var(--row-y);
+    }
+
+    .row--top .row__grid { align-items: start; }
+    .row--summary .row__grid { padding-block: clamp(64px, 9.167vw, 132px); }
+
+    .label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-block: var(--label-pad);
+      color: var(--fg);
+    }
+
+    .label h2, .label p { white-space: nowrap; }
+
+    .dot {
+      flex: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--fg);
+    }
+
+    /* Light leaking in from the page edge, level with the row label */
+    .edge-glow {
+      position: absolute;
+      left: -234.5px;
+      top: var(--label-y);
+      width: 416px;
+      height: 679px;
+      max-width: none;
+      transform: translateY(calc(-50% + 7px));
+      pointer-events: none;
+    }
+
+    .steps { display: flex; flex-direction: column; gap: 64px; }
+
+    .step h3, .detail h3 { margin-bottom: 16px; }
+    .step h3 { color: var(--fg-40); }
+    .detail h3 { color: var(--fg-80); }
+
+    .prose > * + * { margin-top: var(--line); }
+    .prose ul { list-style: none; }
+    .prose li::before { content: "- "; }
+
+    .detail__text > * + * { margin-top: 8px; }
+    .detail__text--loose > * + * { margin-top: var(--line); }
+
+    .guarantee__head { max-width: 14.5em; margin-bottom: 24px; }
+    .guarantee__text { max-width: 662px; }
+
+    .summary { display: grid; gap: 16px; font-family: var(--font-geist); }
+    .summary div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .summary dt { color: var(--fg-40); }
+
+    /* ─── SELECTED WORK ───────────────────────── */
+    .work { --label-y: calc(var(--row-y) + var(--line) / 2); }
+    .work__head { align-items: start; padding-bottom: clamp(32px, 3.333vw, 48px); }
+    .work__head .label { padding-block: 0; }
+
+    .work__grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 40px 24px;
+      padding-bottom: var(--row-y);
+    }
+
+    .case__media {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 1280 / 966;
+      overflow: hidden;
+      border: 1px solid var(--fg-13);
+      background: #0a0a0a;
+      transition: border-color 0.3s ease;
+    }
+
+    .case__media:hover { border-color: var(--fg-30); }
+    .case__media:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
+    .case__media video { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+
+    .case figcaption {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2px 24px;
+      margin-top: 16px;
+      color: var(--fg-80);
+    }
+
+    .case figcaption span { color: var(--fg-40); transition: color 0.3s ease; }
+    .case:hover figcaption span { color: var(--fg-80); }
+
+    /* ─── THANK YOU ───────────────────────────── */
+    .thanks {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      height: clamp(260px, 32.5vw, 468px);
+      background: var(--bg);
+    }
+
+    .thanks .glow { left: calc(50% + 2.5vw); transform: translate(-50%, -43.64%); }
+
+    .thanks .label {
+      position: relative;
+      padding-block: 0;
+      padding-top: clamp(48px, 10.243vw, 147.5px);
+    }
+
+    /* Overlay blend: the letters only show where the glow lifts the black */
+    .thanks__wordmark {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 99.375vw;
+      max-width: 1431px;
+      transform: translate(calc(-50% + 0.3125vw), 18.86%);
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+
+    /* ─── MOTION ──────────────────────────────── */
+    .js .hero__grid { opacity: 0; transform: translateX(-50%) scale(1.05); transition: opacity 2.4s ease, transform 3.6s var(--ease); }
+    .js .hero [data-load] {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 1.2s var(--ease) var(--d, 0s), transform 1.2s var(--ease) var(--d, 0s);
+    }
+    .is-loaded .hero__grid { opacity: 1; transform: translateX(-50%); }
+    .is-loaded .hero [data-load] { opacity: 1; transform: none; }
+
+    .js [data-reveal] {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 1s var(--ease) var(--d, 0s), transform 1s var(--ease) var(--d, 0s);
+    }
+    .js [data-reveal="fade"] { transform: none; transition-duration: 1.6s; }
+    .js [data-reveal].is-in { opacity: 1; transform: none; }
+
+    /* Glows keep their own positioning transform, so they only fade; the concept image settles from a slight zoom */
+    .js [data-reveal="glow"] { transition: opacity 2.6s ease var(--d, 0s); }
+    .js .glow[data-reveal], .js .glow[data-reveal].is-in { transform: translate(-50%, -46.95%); }
+    .js .thanks .glow[data-reveal], .js .thanks .glow[data-reveal].is-in { transform: translate(-50%, -43.64%); }
+    .js .edge-glow[data-reveal], .js .edge-glow[data-reveal].is-in { transform: translateY(calc(-50% + 7px)); }
+    .js .thanks__wordmark[data-reveal], .js .thanks__wordmark[data-reveal].is-in { transform: translate(calc(-50% + 0.3125vw), 18.86%); }
+    .js [data-reveal="zoom"] { transform: scale(1.04); transition-duration: 2s; }
+
+    /* Section dots pop in just after their row starts to show */
+    .js [data-reveal] .dot { transform: scale(0); transition: transform 0.9s var(--ease) 0.25s; }
+    .js [data-reveal].is-in .dot { transform: none; }
+
+    .js .sep span { transform: scale(0, 0.5); transition: transform 1.4s var(--ease); }
+    .js .sep.is-in span { transform: scale(1, 0.5); }
+    .js .sep[data-reveal] { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .js .hero__grid, .js .hero [data-load], .js [data-reveal] { opacity: 1; transition: none; }
+      .js .hero [data-load], .js [data-reveal] { transform: none; }
+      .js .hero__grid { transform: translateX(-50%); }
+      .js .sep span { transform: scale(1, 0.5); transition: none; }
+      .js [data-reveal] .dot { transform: none; transition: none; }
+    }
+
+    @media print {
+      .js .hero__grid, .js .hero [data-load], .js [data-reveal] { opacity: 1; transition: none; }
+      .js .sep span { transform: scale(1, 0.5); }
+      .js [data-reveal] .dot { transform: none; }
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 1040px) {
+      .hero__title { flex-direction: column; align-items: flex-start; }
+
+      .intro__inner, .rationale__inner { flex-direction: column; align-items: flex-start; gap: 40px; }
+      .rationale__lead, .rationale__points { flex: none; max-width: 628px; }
+      .intro__lead { flex: none; max-width: 628px; }
+
+      .goal__inner { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+      .goal__lead { max-width: 640px; }
+      .goal__body { max-width: 560px; }
+    }
+
+    @media (max-width: 900px) {
+      .topbar__note { display: none; }
+    }
+
+    @media (max-width: 760px) {
+      :root {
+        --row-y: 56px;
+        --label-pad: 0px;
+        --line: 26px;
+      }
+
+      body { font-size: 16px; }
+
+      .hero { --hero-h: 600px; padding-bottom: 48px; }
+      .topbar { top: 20px; left: 20px; right: 20px; }
+      .topbar__links { gap: 24px; }
+
+      .hero__title { gap: 10px; padding-block: 24px; }
+      .hero__title h1 { font-size: 30px; line-height: 1.05; }
+      .hero__title p { font-size: 16px; line-height: 24px; }
+
+      .intro__inner { padding-block: 56px; }
+      .intro__lead { line-height: var(--line); }
+
+      .head { font-size: 28px; line-height: 36px; text-wrap: balance; }
+
+      .sep, .row__grid { grid-template-columns: minmax(0, 1fr); }
+      .sep span { grid-column: 1; }
+
+      .row { --label-y: calc(var(--row-y) + var(--line) / 2); }
+      .row--summary .row__grid { padding-block: var(--row-y); }
+      .label { justify-content: flex-start; }
+
+      .steps { gap: 48px; }
+
+      .summary div { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); column-gap: 16px; }
+
+      .work__grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+
+      .thanks .label { padding-top: 56px; justify-content: space-between; }
+    }
+  </style>
+  <script src="../gate.js"></script>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <header class="hero">
+    <img class="hero__grid" src="grid.svg" alt="" aria-hidden="true">
+
+    <nav class="topbar" data-load aria-label="Polify">
+      <a class="topbar__logo" href="https://polify.xyz" target="_blank" rel="noopener" aria-label="Polify">
+        <svg viewBox="0 0 44 22" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M44 3.05882L33.3424 16.9412L27.3761 13.8823L35.7942 3.05882L37.9829 0L44 3.05882Z"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M14.5413 1.63043e-05L37.9829 0L35.7942 3.05882L20.5584 3.05884L14.5413 1.63043e-05Z"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M12.101 13.8824L8.14815 18.9412L0 18.9412L14.5413 1.63043e-05L20.5584 3.05884L12.101 13.8824Z"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M21.7224 22L13.4351 22L6.01709 22L0 18.9412L8.14815 18.9412L15.8141 18.9412L21.7224 22Z"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M23.8941 19.1712L21.7224 22L15.8141 18.9412L17.3696 16.9412L19.7486 13.8823L25.6061 16.9412L23.8941 19.1712Z"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M33.3424 16.9412L25.6061 16.9412L19.7486 13.8823L27.3253 13.8823L27.3276 13.8823H27.3761L33.3424 16.9412Z"/>
+        </svg>
+      </a>
+      <p class="topbar__note">Landing page proposal and first idea.</p>
+      <div class="topbar__links">
+        <a href="https://x.com/polifyxyz" target="_blank" rel="noopener">X.com</a>
+        <a href="https://telegram.me/venompolify" target="_blank" rel="noopener">Telegram</a>
+        <a href="https://polify.xyz" target="_blank" rel="noopener">Website</a>
+      </div>
+    </nav>
+
+    <div class="wrap" data-load style="--d: 0.15s">
+      <div class="hero__title">
+        <h1>ShownMedia<br>Landing Page Proposal</h1>
+        <p>Presented by Polify</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- INTRO -->
+    <section class="intro">
+      <div class="wrap intro__inner">
+        <div class="intro__lead intro__lead--soft" data-reveal>
+          <p>The current site shows work but does not feel like a studio. The hero opens on a gradient, one line of copy and three stat counters. Counters like these are a lead-gen agency pattern, not something top studios put in a hero. They make the operation look smaller and cheaper than it is. Stats belong in case studies, where they have context.</p>
+          <p>The rest of the page has the same issue. Work sits in tiles with nothing framing it. There is no sense of a place, a team or a process behind it, so Shown Media reads as more interchangeable than it actually is.</p>
+        </div>
+        <div class="rationale__points" data-reveal style="--d: 0.1s">
+          <h3 class="inter">What the site needs to communicate:</h3>
+          <ul class="muted">
+            <li><strong>Quality.</strong> The production value of the work is high. The site should match it in craft, pacing and polish, not undercut it with a generic layout.</li>
+            <li><strong>A real studio.</strong> Shown Media is not a freelancer with a Framer template. It is a proper operation with offices in New York and Sarajevo and a large team behind every campaign. The site should make that scale felt, not just stated.</li>
+            <li><strong>Scale of impact.</strong> The results are real, but they should come through the presentation of the work itself and through case studies, not through counters in the hero.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="cue">
+      <img class="glow" src="glow.svg" alt="" aria-hidden="true" data-reveal="glow">
+      <p data-reveal>So we came up with this concept:</p>
+    </section>
+
+    <!-- CONCEPT -->
+    <figure class="concept hairline hairline--both">
+      <picture>
+        <source type="image/avif" srcset="concept-1440.avif 1440w, concept-2880.avif 2880w" sizes="(min-width: 1920px) 1920px, 100vw">
+        <img src="concept-1440.jpg" srcset="concept-1440.jpg 1440w, concept-2880.jpg 2880w" sizes="(min-width: 1920px) 1920px, 100vw"
+             width="1440" height="1024" loading="lazy" decoding="async" data-reveal="zoom"
+             alt="Concept for the new ShownMedia landing page: a curved wall of video screens above the headline “Creativity with real results”">
+      </picture>
+    </figure>
+
+    <section class="rationale">
+      <div class="wrap rationale__inner">
+        <div class="rationale__lead" data-reveal>
+          <h2 class="head inter">Our focus was to make the work feel big, and make the studio feel real.</h2>
+          <p class="intro__lead">The new hero is a space. Three curved screens wrap around the viewer, playing Shown Media work at full scale. Two small people (representing team members) stand in front, which sets the scale and puts people behind the work. The headline sits bottom left, the positioning line bottom right, so the visual lands first and the copy second.</p>
+        </div>
+        <div class="rationale__points" data-reveal style="--d: 0.1s">
+          <h3 class="inter">What the site needs to communicate:</h3>
+          <ul class="muted">
+            <li><strong>Quality.</strong> The production value of the work is high. The site should match it in craft, pacing and polish, not undercut it with a generic layout.</li>
+            <li><strong>A real studio.</strong> Shown Media is not a freelancer with a Framer template. It is a proper operation with offices in New York and Sarajevo and a large team behind every campaign. The site should make that scale felt, not just stated.</li>
+            <li><strong>Scale of impact.</strong> The results are real, but they should come through the presentation of the work itself and through case studies, not through counters in the hero.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="cue hairline hairline--bottom">
+      <img class="glow" src="glow.svg" alt="" aria-hidden="true" data-reveal="glow">
+      <p data-reveal>The proposal:</p>
+    </section>
+
+    <!-- PROJECT GOAL -->
+    <section class="goal inter">
+      <div class="wrap goal__inner">
+        <div class="goal__lead" data-reveal>
+          <p class="goal__eyebrow">Project Goal</p>
+          <h2 class="head">Redesign and develop the Shown Media website into a significantly more premium, high-impact experience.</h2>
+        </div>
+        <div class="goal__body" data-reveal style="--d: 0.1s">
+          <p>The goal is to retain the existing blue brand identity while creating something that feels <strong>sexy, elevated and visually memorable</strong> for the tech, AI and VC audience.</p>
+          <p class="muted">We want the reaction to be simple:</p>
+          <p><em>“Holy shit, this is sexy.”</em></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR PROCESS -->
+    <div class="wrap sep" data-reveal aria-hidden="true"><span></span></div>
+    <section class="row row--top inter">
+      <img class="edge-glow" src="glow-side.svg" alt="" aria-hidden="true" data-reveal="glow">
+      <div class="wrap row__grid">
+        <div class="label" data-reveal><span class="dot"></span><h2>Our Process</h2></div>
+        <div class="steps">
+          <article class="step" data-reveal>
+            <h3>1. Creative Direction &amp; Moodboards</h3>
+            <div class="prose">
+              <p>We begin by exploring multiple visual directions through moodboards.</p>
+              <p>This allows us to align on the right style, references, typography, colors, motion and overall feeling before committing to the full website.</p>
+              <p>The goal is to get as close as possible to the vision Shown wants to achieve from the very beginning.</p>
+            </div>
+          </article>
+          <article class="step" data-reveal>
+            <h3>2. Hero Design + Landing Page Wireframe</h3>
+            <div class="prose">
+              <p>Once the direction is approved, we design the <strong>hero section in full detail</strong> to establish the final visual language.</p>
+              <p>At the same time, we create the wireframe and content structure for the rest of the landing page.</p>
+              <p>This gives us alignment on both:</p>
+              <ul>
+                <li>How the site should <em>look</em></li>
+                <li>How the full experience should <em>flow</em></li>
+              </ul>
+            </div>
+          </article>
+          <article class="step" data-reveal>
+            <h3>3. Full Website Design &amp; Development</h3>
+            <div class="prose">
+              <p>Once the hero and structure are approved, we design the complete landing page and move directly into development.</p>
+              <p>This includes:</p>
+              <ul>
+                <li>Full desktop design</li>
+                <li>Mobile / responsive design</li>
+                <li>Motion and interactions</li>
+                <li>Development</li>
+                <li>Content implementation</li>
+                <li>Responsive optimization</li>
+                <li>Final QA and polish</li>
+                <li>Launch-ready delivery</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVISIONS -->
+    <div class="wrap sep" data-reveal aria-hidden="true"><span></span></div>
+    <section class="row inter">
+      <img class="edge-glow" src="glow-side.svg" alt="" aria-hidden="true" data-reveal="glow">
+      <div class="wrap row__grid">
+        <div class="label" data-reveal><span class="dot"></span><h2>Revisions</h2></div>
+        <div class="detail" data-reveal style="--d: 0.1s">
+          <h3>Unlimited Iterations</h3>
+          <div class="detail__text muted">
+            <p>We want to make sure the final result is something Shown genuinely loves.</p>
+            <p>There is <strong>no fixed number of revision rounds</strong> during the project. We will continue refining the design within the agreed scope until we reach the right result.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <div class="wrap sep" data-reveal aria-hidden="true"><span></span></div>
+    <section class="row inter">
+      <img class="edge-glow" src="glow-side.svg" alt="" aria-hidden="true" data-reveal="glow">
+      <div class="wrap row__grid">
+        <div class="label" data-reveal><span class="dot"></span><h2>Timeline</h2></div>
+        <div class="detail" data-reveal style="--d: 0.1s">
+          <h3>2–3 Weeks</h3>
+          <div class="detail__text muted">
+            <p>From initial moodboards through final design, development and handoff.</p>
+            <p>The timeline assumes relatively fast and consolidated feedback from the Shown team throughout the project.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVESTMENT -->
+    <div class="wrap sep" data-reveal aria-hidden="true"><span></span></div>
+    <section class="row inter">
+      <img class="edge-glow" src="glow-side.svg" alt="" aria-hidden="true" data-reveal="glow">
+      <div class="wrap row__grid">
+        <div class="label" data-reveal><span class="dot"></span><h2>Investment</h2></div>
+        <div class="detail" data-reveal style="--d: 0.1s">
+          <h3>$17,500 USD</h3>
+          <div class="detail__text detail__text--loose muted">
+            <p>Fixed project fee including:</p>
+            <p><strong>Creative direction + UX/UI design + unlimited iterations + responsive development + final launch-ready website.</strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUARANTEE -->
+    <div class="wrap sep" data-reveal aria-hidden="true"><span></span></div>
+    <section class="row inter">
+      <img class="edge-glow" src="glow-side.svg" alt="" aria-hidden="true" data-reveal="glow">
+      <div class="wrap row__grid">
+        <div class="label" data-reveal><span class="dot"></span><h2>Our Guarantee</h2></div>
+        <div class="guarantee" data-reveal style="--d: 0.1s">
+          <p class="head guarantee__head">If you don’t like the final result, you don’t have to pay.</p>
+          <p class="guarantee__text muted">We’ll work collaboratively throughout the process, with alignment at every stage and unlimited iterations within the agreed scope. If, after going through that process, we still aren’t able to create something ShownMedia is happy with, <strong>there is no project fee.</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECT SUMMARY -->
+    <div class="wrap sep" data-reveal aria-hidden="true"><span></span></div>
+    <section class="row row--summary inter">
+      <img class="edge-glow" src="glow-side.svg" alt="" aria-hidden="true" data-reveal="glow">
+      <div class="wrap row__grid">
+        <div class="label" data-reveal><span class="dot"></span><h2>Project Summary</h2></div>
+        <dl class="summary" data-reveal style="--d: 0.1s">
+          <div><dt>Scope</dt><dd>Landing page redesign + development</dd></div>
+          <div><dt>Timeline</dt><dd>2–3 weeks</dd></div>
+          <div><dt>Revisions</dt><dd>Unlimited</dd></div>
+          <div><dt>Investment</dt><dd>$17,500 USD</dd></div>
+          <div><dt>Guarantee</dt><dd>Love the result or don’t pay</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- SELECTED WORK -->
+    <div class="wrap sep" data-reveal aria-hidden="true"><span></span></div>
+    <section class="row work inter">
+      <img class="edge-glow" src="glow-side.svg" alt="" aria-hidden="true" data-reveal="glow">
+      <div class="wrap row__grid work__head">
+        <div class="label" data-reveal><span class="dot"></span><h2>Selected Work</h2></div>
+        <p class="muted" data-reveal style="--d: 0.1s">A few of our recent projects, <strong>in motion.</strong></p>
+      </div>
+      <div class="wrap work__grid">
+        <figure class="case" data-reveal>
+          <a class="case__media" href="https://bloomfi.xyz" target="_blank" rel="noopener" aria-label="Open BloomFi">
+            <video autoplay muted loop playsinline preload="metadata" poster="case-bloomfi.jpg">
+              <source src="case-bloomfi.mp4" type='video/mp4; codecs="hvc1"'>
+              <source src="case-bloomfi.webm" type="video/webm">
+            </video>
+          </a>
+          <figcaption>BloomFi <span>bloomfi.xyz</span></figcaption>
+        </figure>
+        <figure class="case" data-reveal style="--d: 0.1s">
+          <a class="case__media" href="https://blackbird.xyz" target="_blank" rel="noopener" aria-label="Open Blackbird">
+            <video autoplay muted loop playsinline preload="metadata" poster="case-blackbird.jpg">
+              <source src="case-blackbird.mp4" type='video/mp4; codecs="hvc1"'>
+              <source src="case-blackbird.webm" type="video/webm">
+            </video>
+          </a>
+          <figcaption>Blackbird <span>blackbird.xyz</span></figcaption>
+        </figure>
+        <figure class="case" data-reveal>
+          <a class="case__media" href="https://flynet-landing-six.vercel.app" target="_blank" rel="noopener" aria-label="Open Flynet">
+            <video autoplay muted loop playsinline preload="metadata" poster="case-flynet.jpg">
+              <source src="case-flynet.mp4" type='video/mp4; codecs="hvc1"'>
+              <source src="case-flynet.webm" type="video/webm">
+            </video>
+          </a>
+          <figcaption>Flynet <span>flynet-landing-six.vercel.app</span></figcaption>
+        </figure>
+        <figure class="case" data-reveal style="--d: 0.1s">
+          <a class="case__media" href="https://solaris-landing-six.vercel.app" target="_blank" rel="noopener" aria-label="Open Solaris">
+            <video autoplay muted loop playsinline preload="metadata" poster="case-solaris.jpg">
+              <source src="case-solaris.mp4" type='video/mp4; codecs="hvc1"'>
+              <source src="case-solaris.webm" type="video/webm">
+            </video>
+          </a>
+          <figcaption>Solaris <span>solaris-landing-six.vercel.app</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- THANK YOU -->
+    <section class="thanks inter hairline hairline--bottom">
+      <img class="glow" src="glow.svg" alt="" aria-hidden="true" data-reveal="glow">
+      <div class="wrap">
+        <div class="label" data-reveal><span class="dot"></span><p>Thank you!</p></div>
+      </div>
+      <img class="thanks__wordmark" src="polify-wordmark.svg" alt="" aria-hidden="true" data-reveal="glow" style="--d: 0.4s">
+    </section>
+
+  </main>
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var items = [].slice.call(document.querySelectorAll('[data-reveal]'));
+
+    // Case study reels: autoplay and loop; pause offscreen to save bandwidth, resume on return
+    function initReels() {
+      var videos = [].slice.call(document.querySelectorAll('.case video'));
+      function play(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+
+      if (!('IntersectionObserver' in window)) { videos.forEach(play); return; }
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          entry.target.dataset.inView = entry.isIntersecting ? '1' : '';
+          if (entry.isIntersecting) play(entry.target); else entry.target.pause();
+        });
+      }, { rootMargin: '200px 0px' });
+      videos.forEach(function (v) { io.observe(v); });
+
+      // Browsers pause silent video in background tabs
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) return;
+        videos.forEach(function (v) { if (v.dataset.inView === '1') play(v); });
+      });
+    }
+
+    function start() {
+      root.classList.add('is-loaded');
+      initReels();
+
+      if (!('IntersectionObserver' in window)) {
+        items.forEach(function (el) { el.classList.add('is-in'); });
+        return;
+      }
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px' });
+
+      items.forEach(function (el) { io.observe(el); });
+    }
+
+    // gate.js keeps the page hidden until the password is accepted, so hold the intro motion until then
+    (function waitForGate() {
+      if (getComputedStyle(root).visibility === 'hidden') return requestAnimationFrame(waitForGate);
+      start();
+    })();
+  })();
+</script>
+
+</body>
+</html>
