@@ -208,8 +208,8 @@
     .hairline--top::before { top: 0; }
     .hairline--both::before { top: 0; }
     .hairline--both::after { bottom: 0; }
-    /* Under the concept image there is no glow, so the line is much quieter */
-    .concept::after { background: radial-gradient(ellipse 50% 100% at 50% 50%, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.08) 100%); }
+    /* Figma: the line under the concept image is flat 14% white, no fade */
+    .concept::after { background: rgba(255, 255, 255, 0.14); }
     .thanks::after { z-index: 1; }
 
     .glow {
