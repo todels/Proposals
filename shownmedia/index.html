@@ -498,7 +498,6 @@
       .thanks .label { padding-top: 56px; justify-content: space-between; }
     }
   </style>
-  <script src="../gate.js"></script>
 </head>
 <body>
 <div class="page">
@@ -560,7 +559,7 @@
     </section>
 
     <!-- CONCEPT -->
-    <figure class="concept hairline hairline--both">
+    <figure class="concept hairline hairline--top">
       <picture>
         <source type="image/avif" srcset="concept-1440.avif 1440w, concept-2880.avif 2880w" sizes="(min-width: 1920px) 1920px, 100vw">
         <img src="concept-1440.jpg" srcset="concept-1440.jpg 1440w, concept-2880.jpg 2880w" sizes="(min-width: 1920px) 1920px, 100vw"
@@ -838,11 +837,7 @@
       items.forEach(function (el) { io.observe(el); });
     }
 
-    // gate.js keeps the page hidden until the password is accepted, so hold the intro motion until then
-    (function waitForGate() {
-      if (getComputedStyle(root).visibility === 'hidden') return requestAnimationFrame(waitForGate);
-      start();
-    })();
+    start();
   })();
 </script>
 
