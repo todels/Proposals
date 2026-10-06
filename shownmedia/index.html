@@ -471,7 +471,7 @@
 
     @media (max-width: 760px) {
       :root {
-        --row-y: 56px;
+        --row-y: 96px;
         --label-pad: 0px;
         --line: 26px;
       }
@@ -486,7 +486,10 @@
       .hero__title h1 { font-size: 30px; line-height: 1.05; }
       .hero__title p { font-size: 16px; line-height: 24px; }
 
-      .intro__inner { padding-block: 56px; }
+      .intro__inner, .rationale__inner { padding-block: 96px; }
+      .cue { height: 360px; }
+      .cue--tall { height: 420px; }
+      .goal__inner { padding-block: 96px; }
       .intro__lead { line-height: var(--line); }
 
       .head { font-size: 28px; line-height: 36px; text-wrap: balance; }
@@ -504,7 +507,8 @@
 
       .work__grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
 
-      .thanks .label { padding-top: 56px; justify-content: space-between; }
+      .thanks { height: 360px; }
+      .thanks .label { padding-top: 96px; justify-content: space-between; }
     }
   </style>
 </head>
