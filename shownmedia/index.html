@@ -167,7 +167,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 64px;
-      padding-block: clamp(72px, 8.333vw, 120px);
+      padding-block: clamp(72px, 10.73vw, 154.5px);
     }
 
     .rationale__lead { flex: 0 1 628px; }
@@ -191,7 +191,8 @@
       text-align: center;
     }
 
-    .cue p { position: relative; }
+    .cue p { position: relative; font-size: clamp(28px, 2.778vw, 40px); line-height: 1.3; letter-spacing: -0.02em; color: var(--fg); }
+    .cue--tall { height: clamp(320px, 44.375vw, 639px); }
 
     /* Section edges: a hairline that peaks over the glow and fades out towards the sides */
     .hairline::before, .hairline::after {
@@ -555,9 +556,9 @@
       </div>
     </section>
 
-    <section class="cue">
+    <section class="cue cue--tall">
       <img class="glow" src="glow.svg" alt="" aria-hidden="true" data-reveal="glow">
-      <p data-reveal>So we came up with this concept:</p>
+      <p class="inter" data-reveal>So we created a concept:</p>
     </section>
 
     <!-- CONCEPT -->
@@ -589,7 +590,7 @@
 
     <section class="cue hairline hairline--bottom">
       <img class="glow" src="glow.svg" alt="" aria-hidden="true" data-reveal="glow">
-      <p data-reveal>The proposal:</p>
+      <p class="inter" data-reveal>The proposal:</p>
     </section>
 
     <!-- PROJECT GOAL -->
