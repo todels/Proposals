@@ -208,6 +208,8 @@
     .hairline--top::before { top: 0; }
     .hairline--both::before { top: 0; }
     .hairline--both::after { bottom: 0; }
+    /* Under the concept image there is no glow, so the line is much quieter */
+    .concept::after { background: radial-gradient(ellipse 50% 100% at 50% 50%, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.08) 100%); }
     .thanks::after { z-index: 1; }
 
     .glow {
@@ -559,7 +561,7 @@
     </section>
 
     <!-- CONCEPT -->
-    <figure class="concept hairline hairline--top">
+    <figure class="concept hairline hairline--both">
       <picture>
         <source type="image/avif" srcset="concept-1440.avif 1440w, concept-2880.avif 2880w" sizes="(min-width: 1920px) 1920px, 100vw">
         <img src="concept-1440.jpg" srcset="concept-1440.jpg 1440w, concept-2880.jpg 2880w" sizes="(min-width: 1920px) 1920px, 100vw"
