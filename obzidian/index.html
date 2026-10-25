@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>document.documentElement.classList.add('js');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow">
@@ -162,6 +163,63 @@ a:focus-visible { outline: 1px solid var(--fg-50); outline-offset: 4px; }
   .seg__t { flex: 0 0 40px; }
 }
 @media (max-width: 760px) { .beats div { grid-template-columns: 1fr; gap: 2px; } }
+
+/* ---------- Motion (from the ShownMedia proposal) ---------- */
+:root { --ease: cubic-bezier(.22, 1, .36, 1); }
+.js .hero__grid { opacity: 0; transform: translateX(-50%) scale(1.05); transition: opacity 2.4s ease, transform 3.6s var(--ease); }
+.js .hero [data-load] { opacity: 0; transform: translateY(12px); transition: opacity 1.2s var(--ease) var(--d, 0s), transform 1.2s var(--ease) var(--d, 0s); }
+.js .hero [data-load-fade] { opacity: 0; transition: opacity 1.2s var(--ease) var(--d, 0s); }
+.is-loaded .hero__grid { opacity: 1; transform: translateX(-50%); }
+.is-loaded .hero [data-load] { opacity: 1; transform: none; }
+.is-loaded .hero [data-load-fade] { opacity: .5; }
+
+.js [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity 1s var(--ease) var(--d, 0s), transform 1s var(--ease) var(--d, 0s); }
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+/* Glows keep their own positioning transform, so they only fade */
+.js [data-reveal="glow"] { transition: opacity 2.6s ease var(--d, 0s); }
+.js .glow[data-reveal], .js .glow[data-reveal].is-in { transform: translateX(-50%); }
+.js .side-glow[data-reveal], .js .side-glow[data-reveal].is-in { transform: translateY(-50%); }
+.js .wordmark[data-reveal], .js .wordmark[data-reveal].is-in { transform: translate(-50%, 18.86%); }
+/* Divider lines draw outward; section dots pop in just after their row */
+.js [data-reveal="line"] { opacity: 1; transform: scaleX(0); transition: transform 1.4s var(--ease); }
+.js [data-reveal="line"].is-in { transform: scaleX(1); }
+.js [data-reveal] > .dot { transform: scale(0); transition: transform .9s var(--ease) .25s; }
+.js [data-reveal].is-in > .dot { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .hero__grid, .js .hero [data-load], .js [data-reveal] { opacity: 1; transition: none; }
+  .js .hero [data-load-fade] { opacity: .5; transition: none; }
+  .js .hero [data-load], .js [data-reveal]:not(.glow):not(.side-glow):not(.wordmark) { transform: none; }
+  .js .hero__grid { transform: translateX(-50%); }
+  .js [data-reveal] > .dot { transform: none; transition: none; }
+}
+
+/* ---------- Selected work ---------- */
+.work { width: 100%; padding-bottom: 104px; }
+.work .row { padding-bottom: 24px; }
+.work__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 24px; padding-left: max(var(--pad-x), env(safe-area-inset-left, 0px)); padding-right: max(var(--pad-x), env(safe-area-inset-right, 0px)); }
+.case { margin: 0; min-width: 0; }
+.case__media { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; padding: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.13); background: #0a0a0a; cursor: pointer; transition: border-color .3s ease; }
+.case__media:hover { border-color: rgba(255,255,255,.3); }
+.case__media:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
+.case__media video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.case__play { position: absolute; right: 12px; bottom: 12px; display: flex; align-items: center; gap: 8px; padding: 6px 10px 6px 8px; border-radius: 999px; background: rgba(0,0,0,.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); font: 500 13px/16px var(--font-display); color: var(--fg); opacity: 0; transform: translateY(4px); transition: opacity .3s ease, transform .3s var(--ease); }
+.case__play svg { width: 12px; height: 12px; }
+.case__media:hover .case__play, .case__media:focus-visible .case__play { opacity: 1; transform: none; }
+.case figcaption { display: flex; justify-content: space-between; gap: 16px; margin-top: 16px; font: 500 18px/28px var(--font-body); letter-spacing: -.36px; color: var(--fg-80); }
+.case figcaption span { color: var(--fg-40); font-family: var(--font-display); font-variant-numeric: tabular-nums; transition: color .3s ease; }
+.case:hover figcaption span { color: var(--fg-80); }
+
+/* Full-length player */
+.player { width: min(1280px, calc(100vw - 32px)); max-width: none; max-height: none; padding: 0; border: 1px solid rgba(255,255,255,.13); background: #000; color: var(--fg); overflow: visible; }
+.player::backdrop { background: rgba(0,0,0,.88); backdrop-filter: blur(6px); }
+.player video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #000; }
+.player__bar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 16px; font: 500 15px/20px var(--font-body); color: var(--fg-80); }
+.player__close { appearance: none; border: 0; background: none; color: var(--fg-50); font: inherit; cursor: pointer; padding: 4px 0; }
+.player__close:hover, .player__close:focus-visible { color: var(--fg); }
+
+@media (max-width: 1000px) { .work__grid { grid-template-columns: 1fr; max-width: 720px; margin-inline: auto; } }
+@media (max-width: 760px) { .work__grid { gap: 32px; } .work { padding-bottom: 64px; } .case__play { opacity: 1; transform: none; } }
 </style>
 </head>
 <body>
@@ -170,45 +228,45 @@ a:focus-visible { outline: 1px solid var(--fg-50); outline-offset: 4px; }
   <header class="hero">
     <img class="hero__grid" src="assets/grid.svg" alt="">
     <div class="hero__bar">
-      <img class="hero__logo" src="assets/polify-logo.svg" alt="Polify">
-      <p class="hero__tag">Launch video proposal and scope of work.</p>
-      <nav class="hero__nav" aria-label="Polify">
+      <img class="hero__logo" src="assets/polify-logo.svg" alt="Polify" data-load>
+      <p class="hero__tag" data-load-fade style="--d: .15s">Launch video proposal and scope of work.</p>
+      <nav class="hero__nav" aria-label="Polify" data-load style="--d: .15s">
         <a href="#">X.com</a>
         <a href="#">Telegram</a>
         <a href="#">Website</a>
       </nav>
     </div>
     <div class="hero__title">
-      <h1><span>Obzidian</span><span>Launch Video Proposal</span></h1>
-      <p class="hero__by">Presented by Polify</p>
+      <h1 data-load style="--d: .3s"><span>Obzidian</span><span>Launch Video Proposal</span></h1>
+      <p class="hero__by" data-load style="--d: .45s">Presented by Polify</p>
     </div>
   </header>
 
   <section class="divider">
-    <img class="glow" src="assets/glow.svg" alt="">
-    <h2>The proposal:</h2>
+    <img class="glow" src="assets/glow.svg" alt="" data-reveal="glow">
+    <h2 data-reveal>The proposal:</h2>
   </section>
 
   <section class="goal">
-    <div class="goal__lead">
+    <div class="goal__lead" data-reveal>
       <p class="goal__eyebrow">Project Overview</p>
       <p class="goal__headline">Create a 1:45 launch video that introduces Obzidian in a high-impact, premium way.</p>
     </div>
-    <div class="goal__copy">
+    <div class="goal__copy" data-reveal style="--d: .1s">
       <p>One film that shows the trading floor building itself around the trader: <em>real product, no mockups</em>, with the founder on camera from first frame to last.</p>
       <p class="muted">Built from the approved launch script, finished in motion, sound and color, and delivered as a master plus social-ready cuts.</p>
     </div>
   </section>
 
-  <img class="rule" src="assets/line.svg" alt="">
+  <img class="rule" src="assets/line.svg" alt="" data-reveal="line">
 
   <section class="row row--top" aria-labelledby="film-h">
-    <div class="row__label">
-      <img class="side-glow" src="assets/side-glow.svg" alt="">
+    <div class="row__label" data-reveal>
+      <img class="side-glow" src="assets/side-glow.svg" alt="" data-reveal="glow">
       <img class="dot" src="assets/dot-active.svg" alt="">
       <h2 id="film-h">The Film</h2>
     </div>
-    <div class="row__body">
+    <div class="row__body" data-reveal style="--d: .1s">
       <p class="note">Nine scenes, as written in the launch script.</p>
       <dl class="beats">
         <div><dt>0:00–0:10</dt><dd><b>The hook.</b> Panes fly in and arrange themselves around the founder.</dd></div>
@@ -225,15 +283,15 @@ a:focus-visible { outline: 1px solid var(--fg-50); outline-offset: 4px; }
   </section>
 
 
-  <img class="rule" src="assets/line.svg" alt="">
+  <img class="rule" src="assets/line.svg" alt="" data-reveal="line">
 
   <section class="row row--top" aria-labelledby="flow-h">
-    <div class="row__label">
-      <img class="side-glow" src="assets/side-glow.svg" alt="">
+    <div class="row__label" data-reveal>
+      <img class="side-glow" src="assets/side-glow.svg" alt="" data-reveal="glow">
       <img class="dot" src="assets/dot.svg" alt="">
       <h2 id="flow-h">The Flow</h2>
     </div>
-    <div class="row__body">
+    <div class="row__body" data-reveal style="--d: .1s">
       <p>The film moves in four parts. The hook earns attention, the problem and tension make the viewer feel the pain, the solution shows the floor working, and the outro lands the line and the CTA.</p>
       <div class="timeline" role="img" aria-label="The flow across 1:45: Hook 0:00 to 0:18, Problem and Tension 0:18 to 0:40, Solution 0:40 to 1:34, Outro 1:34 to 1:45">
         <div class="timeline__ruler" aria-hidden="true"></div>
@@ -255,15 +313,15 @@ a:focus-visible { outline: 1px solid var(--fg-50); outline-offset: 4px; }
     </div>
   </section>
 
-  <img class="rule" src="assets/line.svg" alt="">
+  <img class="rule" src="assets/line.svg" alt="" data-reveal="line">
 
   <section class="row row--top" aria-labelledby="scope-h">
-    <div class="row__label">
-      <img class="side-glow" src="assets/side-glow.svg" alt="">
+    <div class="row__label" data-reveal>
+      <img class="side-glow" src="assets/side-glow.svg" alt="" data-reveal="glow">
       <img class="dot" src="assets/dot.svg" alt="">
       <h2 id="scope-h">Scope of Work</h2>
     </div>
-    <ol class="row__body scope">
+    <ol class="row__body scope" data-reveal style="--d: .1s">
       <li><h3>1. Creative Direction &amp; Visual References</h3><p>Establish the visual direction, pacing, references, and overall tone for the launch video.</p></li>
       <li><h3>2. Storyboard / Scene Planning</h3><p>Map out all nine scenes of the 1:45 sequence before animation begins.</p></li>
       <li><h3>3. Motion Design &amp; Animation</h3><p>Produce the full animated video based on the approved storyboard and script, including the pane system and product UI sequences.</p></li>
@@ -274,15 +332,15 @@ a:focus-visible { outline: 1px solid var(--fg-50); outline-offset: 4px; }
     </ol>
   </section>
 
-  <img class="rule" src="assets/line.svg" alt="">
+  <img class="rule" src="assets/line.svg" alt="" data-reveal="line">
 
   <section class="row" aria-labelledby="timeline-h">
-    <div class="row__label">
-      <img class="side-glow" src="assets/side-glow.svg" alt="">
+    <div class="row__label" data-reveal>
+      <img class="side-glow" src="assets/side-glow.svg" alt="" data-reveal="glow">
       <img class="dot" src="assets/dot.svg" alt="">
       <h2 id="timeline-h">Timeline</h2>
     </div>
-    <div class="row__body">
+    <div class="row__body" data-reveal style="--d: .1s">
       <p class="lead">2 weeks · October 28 – November 11, 2026</p>
       <dl class="dates">
         <div><dt>Kickoff &amp; final script received</dt><dd>Target Wednesday, October 28</dd></div>
@@ -294,15 +352,15 @@ a:focus-visible { outline: 1px solid var(--fg-50); outline-offset: 4px; }
     </div>
   </section>
 
-  <img class="rule" src="assets/line.svg" alt="">
+  <img class="rule" src="assets/line.svg" alt="" data-reveal="line">
 
   <section class="row" aria-labelledby="invest-h">
-    <div class="row__label">
-      <img class="side-glow" src="assets/side-glow.svg" alt="">
+    <div class="row__label" data-reveal>
+      <img class="side-glow" src="assets/side-glow.svg" alt="" data-reveal="glow">
       <img class="dot" src="assets/dot.svg" alt="">
       <h2 id="invest-h">Investment</h2>
     </div>
-    <div class="row__body">
+    <div class="row__body" data-reveal style="--d: .1s">
       <p class="lead">$3,500 USD</p>
       <div class="note">
         <p>Payment terms: 100% upfront prior to project kickoff.</p>
@@ -310,15 +368,15 @@ a:focus-visible { outline: 1px solid var(--fg-50); outline-offset: 4px; }
     </div>
   </section>
 
-  <img class="rule" src="assets/line.svg" alt="">
+  <img class="rule" src="assets/line.svg" alt="" data-reveal="line">
 
   <section class="row" aria-labelledby="deliv-h">
-    <div class="row__label">
-      <img class="side-glow" src="assets/side-glow.svg" alt="">
+    <div class="row__label" data-reveal>
+      <img class="side-glow" src="assets/side-glow.svg" alt="" data-reveal="glow">
       <img class="dot" src="assets/dot.svg" alt="">
       <h2 id="deliv-h">Deliverables</h2>
     </div>
-    <div class="row__body">
+    <div class="row__body" data-reveal style="--d: .1s">
       <ul class="dash">
         <li>1 × 1:45 Obzidian launch video</li>
         <li>Final high-resolution master</li>
@@ -328,15 +386,15 @@ a:focus-visible { outline: 1px solid var(--fg-50); outline-offset: 4px; }
     </div>
   </section>
 
-  <img class="rule" src="assets/line.svg" alt="">
+  <img class="rule" src="assets/line.svg" alt="" data-reveal="line">
 
   <section class="row row--fixed" aria-labelledby="summary-h">
-    <div class="row__label">
-      <img class="side-glow" src="assets/side-glow.svg" alt="">
+    <div class="row__label" data-reveal>
+      <img class="side-glow" src="assets/side-glow.svg" alt="" data-reveal="glow">
       <img class="dot" src="assets/dot.svg" alt="">
       <h2 id="summary-h">Project Summary</h2>
     </div>
-    <dl class="row__body summary">
+    <dl class="row__body summary" data-reveal style="--d: .1s">
       <div><dt>Scope</dt><dd>1:45 launch video</dd></div>
       <div><dt>Timeline</dt><dd>2 weeks, October 28 – November 11, 2026</dd></div>
       <div><dt>Revisions</dt><dd>Reasonable revisions throughout production</dd></div>
@@ -345,15 +403,158 @@ a:focus-visible { outline: 1px solid var(--fg-50); outline-offset: 4px; }
     </dl>
   </section>
 
+  <img class="rule" src="assets/line.svg" alt="" data-reveal="line">
+
+  <section class="work" aria-labelledby="work-h">
+    <div class="row">
+      <div class="row__label" data-reveal>
+        <img class="side-glow" src="assets/side-glow.svg" alt="" data-reveal="glow">
+        <img class="dot" src="assets/dot.svg" alt="">
+        <h2 id="work-h">Selected Work</h2>
+      </div>
+      <div class="row__body" data-reveal style="--d: .1s">
+        <p>A few of our recent launch films and ads, <span style="color:var(--fg)">in motion.</span></p>
+        <p class="note">Click any film to watch it in full with sound.</p>
+      </div>
+    </div>
+    <div class="work__grid">
+        <figure class="case" data-reveal>
+          <button class="case__media" type="button" data-full="../showcase/aurus.mp4" data-title="Aurus" aria-label="Play the Aurus video with sound">
+            <video autoplay muted loop playsinline preload="metadata" poster="../showcase/aurus.jpg" src="../showcase/aurus-loop.mp4"></video>
+            <span class="case__play" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 1.5v9l8-4.5z" fill="currentColor"/></svg>Watch with sound</span>
+          </button>
+          <figcaption>Aurus <span>0:51</span></figcaption>
+        </figure>
+        <figure class="case" data-reveal style="--d: .1s">
+          <button class="case__media" type="button" data-full="../showcase/pear.mp4" data-title="Pear" aria-label="Play the Pear video with sound">
+            <video autoplay muted loop playsinline preload="metadata" poster="../showcase/pear.jpg" src="../showcase/pear-loop.mp4"></video>
+            <span class="case__play" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 1.5v9l8-4.5z" fill="currentColor"/></svg>Watch with sound</span>
+          </button>
+          <figcaption>Pear <span>0:45</span></figcaption>
+        </figure>
+        <figure class="case" data-reveal style="--d: .2s">
+          <button class="case__media" type="button" data-full="../showcase/polymarket.mp4" data-title="Polymarket" aria-label="Play the Polymarket video with sound">
+            <video autoplay muted loop playsinline preload="metadata" poster="../showcase/polymarket.jpg" src="../showcase/polymarket-loop.mp4"></video>
+            <span class="case__play" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 1.5v9l8-4.5z" fill="currentColor"/></svg>Watch with sound</span>
+          </button>
+          <figcaption>Polymarket <span>1:11</span></figcaption>
+        </figure>
+        <figure class="case" data-reveal>
+          <button class="case__media" type="button" data-full="../showcase/render2.mp4" data-title="Aurus, terminal cut" aria-label="Play the Aurus, terminal cut video with sound">
+            <video autoplay muted loop playsinline preload="metadata" poster="../showcase/render2.jpg" src="../showcase/render2-loop.mp4"></video>
+            <span class="case__play" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 1.5v9l8-4.5z" fill="currentColor"/></svg>Watch with sound</span>
+          </button>
+          <figcaption>Aurus, terminal cut <span>1:02</span></figcaption>
+        </figure>
+        <figure class="case" data-reveal style="--d: .1s">
+          <button class="case__media" type="button" data-full="../showcase/pear-sports.mp4" data-title="Pear, sports cut" aria-label="Play the Pear, sports cut video with sound">
+            <video autoplay muted loop playsinline preload="metadata" poster="../showcase/pear-sports.jpg" src="../showcase/pear-sports-loop.mp4"></video>
+            <span class="case__play" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 1.5v9l8-4.5z" fill="currentColor"/></svg>Watch with sound</span>
+          </button>
+          <figcaption>Pear, sports cut <span>0:41</span></figcaption>
+        </figure>
+        <figure class="case" data-reveal style="--d: .2s">
+          <button class="case__media" type="button" data-full="../showcase/pov04.mp4" data-title="Polymarket, POV cut" aria-label="Play the Polymarket, POV cut video with sound">
+            <video autoplay muted loop playsinline preload="metadata" poster="../showcase/pov04.jpg" src="../showcase/pov04-loop.mp4"></video>
+            <span class="case__play" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 1.5v9l8-4.5z" fill="currentColor"/></svg>Watch with sound</span>
+          </button>
+          <figcaption>Polymarket, POV cut <span>0:34</span></figcaption>
+        </figure>
+        <figure class="case" data-reveal>
+          <button class="case__media" type="button" data-full="../showcase/warp.mp4" data-title="Warp 2.0" aria-label="Play the Warp 2.0 video with sound">
+            <video autoplay muted loop playsinline preload="metadata" poster="../showcase/warp.jpg" src="../showcase/warp-loop.mp4"></video>
+            <span class="case__play" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 1.5v9l8-4.5z" fill="currentColor"/></svg>Watch with sound</span>
+          </button>
+          <figcaption>Warp 2.0 <span>2:27</span></figcaption>
+        </figure>
+        <figure class="case" data-reveal style="--d: .1s">
+          <button class="case__media" type="button" data-full="../showcase/whop.mp4" data-title="Whop" aria-label="Play the Whop video with sound">
+            <video autoplay muted loop playsinline preload="metadata" poster="../showcase/whop.jpg" src="../showcase/whop-loop.mp4"></video>
+            <span class="case__play" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 1.5v9l8-4.5z" fill="currentColor"/></svg>Watch with sound</span>
+          </button>
+          <figcaption>Whop <span>1:35</span></figcaption>
+        </figure>
+        <figure class="case" data-reveal style="--d: .2s">
+          <button class="case__media" type="button" data-full="../showcase/vault777.mp4" data-title="Vault777" aria-label="Play the Vault777 video with sound">
+            <video autoplay muted loop playsinline preload="metadata" poster="../showcase/vault777.jpg" src="../showcase/vault777-loop.mp4"></video>
+            <span class="case__play" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2.5 1.5v9l8-4.5z" fill="currentColor"/></svg>Watch with sound</span>
+          </button>
+          <figcaption>Vault777 <span>0:39</span></figcaption>
+        </figure>
+    </div>
+  </section>
+
+  <dialog class="player" id="player" aria-label="Video player">
+    <video controls playsinline preload="none"></video>
+    <div class="player__bar"><span class="player__title"></span><button class="player__close" type="button">Close</button></div>
+  </dialog>
+
   <section class="thanks">
-    <img class="glow" src="assets/glow.svg" alt="">
-    <div class="row__label">
+    <img class="glow" src="assets/glow.svg" alt="" data-reveal="glow">
+    <div class="row__label" data-reveal>
       <img class="dot" src="assets/dot.svg" alt="">
       <h2>Thank you!</h2>
     </div>
-    <img class="wordmark" src="assets/polify-wordmark.svg" alt="">
+    <img class="wordmark" src="assets/polify-wordmark.svg" alt="" data-reveal="glow" style="--d: .4s">
   </section>
 
 </main>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var items = [].slice.call(document.querySelectorAll('[data-reveal]'));
+
+  // Showcase loops: play while on screen, pause offscreen to save bandwidth
+  function initReels() {
+    var videos = [].slice.call(document.querySelectorAll('.case video'));
+    function play(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    if (!('IntersectionObserver' in window)) { videos.forEach(play); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        e.target.dataset.inView = e.isIntersecting ? '1' : '';
+        if (e.isIntersecting) play(e.target); else e.target.pause();
+      });
+    }, { rootMargin: '200px 0px' });
+    videos.forEach(function (v) { io.observe(v); });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) return;
+      videos.forEach(function (v) { if (v.dataset.inView === '1') play(v); });
+    });
+  }
+
+  // Full-length player with sound
+  function initPlayer() {
+    var dlg = document.getElementById('player');
+    if (!dlg || !dlg.showModal) return;
+    var vid = dlg.querySelector('video'), title = dlg.querySelector('.player__title');
+    document.querySelectorAll('.case__media').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        vid.src = btn.dataset.full; title.textContent = btn.dataset.title;
+        dlg.showModal();
+        var p = vid.play(); if (p && p.catch) p.catch(function () {});
+      });
+    });
+    function close() { dlg.close(); }
+    dlg.querySelector('.player__close').addEventListener('click', close);
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) close(); });
+    dlg.addEventListener('close', function () { vid.pause(); vid.removeAttribute('src'); vid.load(); });
+  }
+
+  function start() {
+    root.classList.add('is-loaded');
+    initReels(); initPlayer();
+    if (!('IntersectionObserver' in window)) { items.forEach(function (el) { el.classList.add('is-in'); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-in'); io.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    items.forEach(function (el) { io.observe(el); });
+  }
+  requestAnimationFrame(function () { requestAnimationFrame(start); });
+})();
+</script>
 </body>
 </html>
