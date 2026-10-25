@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Doji Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<!-- Bump ?v= on every deploy: GitHub Pages lets browsers cache files for 10 minutes, and this keeps a fresh page from pairing with stale CSS/JS. -->
+<link rel="stylesheet" href="style.css?v=5">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m18 15-6-6-6 6"/></symbol>
+  <symbol id="i-import" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+  <symbol id="i-export" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/></symbol>
+</svg>
+
+<div class="stage"><canvas id="gl" aria-label="Animated doji portal: one clean line of light falling through a black hole that bends it into a ring"></canvas></div>
+
+<h1 class="brand" id="brand">
+  <span class="logo"><svg viewBox="0 0 149 133" aria-hidden="true"><path d="M94.9758 0C96.5559 0 97.6655 1.5519 97.1501 3.04107L86.021 35.1968C80.9602 49.8193 64.3904 61.7054 48.8207 61.9782C48.4937 61.9839 48.2034 62.1898 48.0968 62.498L45.5307 69.9121C45.3589 70.4085 45.7329 70.9261 46.2593 70.9449C61.2966 71.4819 69.3862 83.2605 64.3846 97.7119L52.7066 131.455C52.3866 132.38 51.5134 133 50.5323 133H4.52259C1.08408 133 -0.796042 130.378 0.32338 127.143L42.3009 5.85564C43.4206 2.62134 47.1155 0 50.5538 0H94.9758Z"/><path d="M105.42 1.55304C105.737 0.624316 106.616 -0.00694223 107.6 0.0358363C135.433 1.24676 157.441 32.9574 145.832 66.4994C134.337 99.7147 99.4617 131.135 63.4208 132.92C61.8461 132.998 60.7359 131.455 61.2447 129.967L72.2764 97.7119C77.3372 83.0894 93.907 71.2034 109.477 70.9306C109.804 70.9249 110.094 70.719 110.201 70.4108L112.767 62.9966C112.938 62.5003 112.564 61.9826 112.038 61.9638C97.0008 61.4269 88.9112 49.6482 93.9128 35.1968L105.42 1.55304Z"/></svg></span>
+  Doji Portal
+</h1>
+
+<button type="button" class="btn show" id="show" hidden>Show controls</button>
+
+<form class="panel" id="panel" autocomplete="off">
+  <div class="panel-head">
+    <h2>Controls</h2>
+    <button type="button" class="icon" id="defaults" title="Reset everything" aria-label="Reset everything"><svg class="ic"><use href="#i-reset"/></svg></button>
+    <button type="button" class="icon" id="collapse" aria-expanded="true" aria-controls="panelBody" aria-label="Collapse panel"><svg class="ic chev"><use href="#i-chev"/></svg></button>
+  </div>
+
+  <div class="panel-body" id="panelBody">
+    <div class="actions">
+      <div class="two">
+        <button type="button" class="btn" id="loadBtn"><svg class="ic"><use href="#i-import"/></svg><span>Import settings</span></button>
+        <button type="button" class="btn" id="copy"><svg class="ic"><use href="#i-copy"/></svg><span>Copy settings</span></button>
+      </div>
+      <input type="file" id="loadFile" accept=".png,.gif,.mp4,.json,image/png,image/gif,video/mp4,application/json" hidden>
+      <p class="hint" id="loadMsg" aria-live="polite"></p>
+      <label for="dump" hidden id="dumpLabel" class="hint">Settings (select all and copy)</label>
+      <textarea id="dump" hidden readonly rows="5"></textarea>
+    </div>
+
+    <section class="sec" data-sec="presets">
+      <div class="sec-head">
+        <h2 id="h-presets">Presets</h2>
+        <button type="button" class="icon box" data-collapse aria-expanded="true" aria-controls="b-presets" aria-labelledby="h-presets"><svg class="ic chev"><use href="#i-chev"/></svg></button>
+      </div>
+      <div class="sec-body" id="b-presets"><div class="sec-in">
+        <div class="seg" role="group" aria-labelledby="h-presets">
+          <button type="button" data-preset="doji">Doji</button>
+          <button type="button" data-preset="clean">Clean</button>
+          <button type="button" data-preset="vortex">Vortex</button>
+          <button type="button" data-preset="wide">Wide</button>
+          <button type="button" data-preset="contour">Contour</button>
+        </div>
+      </div></div>
+    </section>
+
+    <section class="sec" data-sec="canvas">
+      <div class="sec-head">
+        <h2 id="h-canvas">Canvas</h2>
+        <button type="button" class="icon" data-reset title="Reset canvas" aria-label="Reset canvas"><svg class="ic"><use href="#i-reset"/></svg></button>
+        <button type="button" class="icon box" data-collapse aria-expanded="true" aria-controls="b-canvas" aria-labelledby="h-canvas"><svg class="ic chev"><use href="#i-chev"/></svg></button>
+      </div>
+      <div class="sec-body" id="b-canvas"><div class="sec-in">
+        <label class="switch"><input type="checkbox" id="animate" role="switch" checked>Animate</label>
+        <div class="field"><label class="flabel" for="ratio">Aspect ratio</label>
+          <select id="ratio">
+            <option value="full" selected>Full window</option>
+            <option value="1.7778">16:9</option>
+            <option value="0.5625">9:16</option>
+            <option value="1">1:1</option>
+            <option value="0.8">4:5</option>
+          </select></div>
+        <div class="field"><div class="lab"><label for="time">Time</label><output for="time"></output></div><input type="range" id="time" min="0" max="3" step="0.05" value="1"></div>
+      </div></div>
+    </section>
+
+    <section class="sec" data-sec="dots">
+      <div class="sec-head">
+        <h2 id="h-dots">Dots</h2>
+        <button type="button" class="icon" data-reset title="Reset dots" aria-label="Reset dots"><svg class="ic"><use href="#i-reset"/></svg></button>
+        <button type="button" class="icon box" data-collapse aria-expanded="true" aria-controls="b-dots" aria-labelledby="h-dots"><svg class="ic chev"><use href="#i-chev"/></svg></button>
+      </div>
+      <div class="sec-body" id="b-dots"><div class="sec-in">
+        <div class="field"><div class="lab"><label for="lw">Dot size</label><output for="lw"></output></div><input type="range" id="lw" min="0.2" max="4" step="0.01" value="0.2"></div>
+        <div class="field"><div class="lab"><label for="dens">Dots</label><output for="dens"></output></div><input type="range" id="dens" min="0" max="1" step="0.01" value="1"></div>
+        <div class="field"><div class="lab"><label for="spread">Spread</label><output for="spread"></output></div><input type="range" id="spread" min="0.0002" max="0.02" step="0.0001" value="0.0002"></div>
+        <div class="field"><div class="lab"><label for="stretch">Stretch</label><output for="stretch"></output></div><input type="range" id="stretch" min="0" max="1" step="0.01" value="0.49"></div>
+        <div class="field"><div class="lab"><label for="speed">Speed</label><output for="speed"></output></div><input type="range" id="speed" min="0" max="1" step="0.01" value="0.08"></div>
+        <div class="field"><div class="lab"><label for="off">Offset</label><output for="off"></output></div><input type="range" id="off" min="-0.05" max="0.05" step="0.001" value="0"></div>
+      </div></div>
+    </section>
+
+    <section class="sec" data-sec="stream" data-closed>
+      <div class="sec-head">
+        <h2 id="h-stream">Stream</h2>
+        <button type="button" class="icon" data-reset title="Reset stream" aria-label="Reset stream"><svg class="ic"><use href="#i-reset"/></svg></button>
+        <button type="button" class="icon box" data-collapse aria-expanded="true" aria-controls="b-stream" aria-labelledby="h-stream"><svg class="ic chev"><use href="#i-chev"/></svg></button>
+      </div>
+      <div class="sec-body" id="b-stream"><div class="sec-in">
+        <div class="field"><div class="lab"><label for="front">Front line</label><output for="front"></output></div><input type="range" id="front" min="0" max="2" step="0.01" value="0.78"></div>
+        <div class="field"><div class="lab"><label for="corebend">Middle warp</label><output for="corebend"></output></div><input type="range" id="corebend" min="0" max="1" step="0.01" value="0.3"></div>
+        <div class="field"><div class="lab"><label for="fill">Fan out</label><output for="fill"></output></div><input type="range" id="fill" min="0" max="1" step="0.01" value="0.34"></div>
+        <div class="field"><div class="lab"><label for="reach">Fan reach</label><output for="reach"></output></div><input type="range" id="reach" min="0.5" max="4" step="0.01" value="0.8"></div>
+      </div></div>
+    </section>
+
+    <section class="sec" data-sec="layers" data-closed>
+      <div class="sec-head">
+        <h2 id="h-layers">Layers</h2>
+        <button type="button" class="icon" data-reset title="Reset layers" aria-label="Reset layers"><svg class="ic"><use href="#i-reset"/></svg></button>
+        <button type="button" class="icon box" data-collapse aria-expanded="true" aria-controls="b-layers" aria-labelledby="h-layers"><svg class="ic chev"><use href="#i-chev"/></svg></button>
+      </div>
+      <div class="sec-body" id="b-layers"><div class="sec-in">
+        <div class="field"><div class="lab"><label for="layers">Layers</label><output for="layers"></output></div><input type="range" id="layers" min="1" max="8" step="1" value="8"></div>
+        <div class="field"><div class="lab"><label for="depth">Depth</label><output for="depth"></output></div><input type="range" id="depth" min="0" max="1" step="0.01" value="0.09"></div>
+        <div class="field"><div class="lab"><label for="loff">Drift</label><output for="loff"></output></div><input type="range" id="loff" min="0" max="0.08" step="0.001" value="0.042"></div>
+        <div class="field"><div class="lab"><label for="tails">Back tails</label><output for="tails"></output></div><input type="range" id="tails" min="0" max="1" step="0.01" value="1"></div>
+        <div class="field"><div class="lab"><label for="breathe">Breathe</label><output for="breathe"></output></div><input type="range" id="breathe" min="0" max="1" step="0.01" value="0.3"></div>
+        <div class="field"><div class="lab"><label for="bspeed">Breathe speed</label><output for="bspeed"></output></div><input type="range" id="bspeed" min="0.01" max="1" step="0.01" value="0.12"></div>
+        <div class="field"><div class="lab"><label for="hotamt">Hot ring</label><output for="hotamt"></output></div><input type="range" id="hotamt" min="0" max="1" step="0.01" value="0"></div>
+        <div class="field"><div class="lab"><label for="hotpos">Hot layer</label><output for="hotpos"></output></div><input type="range" id="hotpos" min="0" max="1" step="0.01" value="0.33"></div>
+      </div></div>
+    </section>
+
+    <section class="sec" data-sec="warp" data-closed>
+      <div class="sec-head">
+        <h2 id="h-warp">Warp</h2>
+        <button type="button" class="icon" data-reset title="Reset warp" aria-label="Reset warp"><svg class="ic"><use href="#i-reset"/></svg></button>
+        <button type="button" class="icon box" data-collapse aria-expanded="true" aria-controls="b-warp" aria-labelledby="h-warp"><svg class="ic chev"><use href="#i-chev"/></svg></button>
+      </div>
+      <div class="sec-body" id="b-warp"><div class="sec-in">
+        <div class="field"><div class="lab"><label for="mass">Mass</label><output for="mass"></output></div><input type="range" id="mass" min="0" max="0.4" step="0.005" value="0.17"></div>
+        <div class="field"><div class="lab"><label for="hor">Hole</label><output for="hor"></output></div><input type="range" id="hor" min="0" max="1" step="0.01" value="0.58"></div>
+        <div class="field"><div class="lab"><label for="warp">Warp</label><output for="warp"></output></div><input type="range" id="warp" min="0.2" max="3" step="0.01" value="1.7"></div>
+        <div class="field"><div class="lab"><label for="wfall">Warp reach</label><output for="wfall"></output></div><input type="range" id="wfall" min="0.2" max="1.5" step="0.01" value="0.52"></div>
+        <div class="field"><div class="lab"><label for="inner">Inside dots</label><output for="inner"></output></div><input type="range" id="inner" min="0" max="1" step="0.01" value="0.19"></div>
+        <div class="field"><div class="lab"><label for="twist">Twist</label><output for="twist"></output></div><input type="range" id="twist" min="-3" max="3" step="0.01" value="0"></div>
+        <div class="field"><div class="lab"><label for="turb">Ripples</label><output for="turb"></output></div><input type="range" id="turb" min="0" max="1" step="0.01" value="0"></div>
+      </div></div>
+    </section>
+
+    <section class="sec" data-sec="camera" data-closed>
+      <div class="sec-head">
+        <h2 id="h-camera">Camera</h2>
+        <button type="button" class="icon" data-reset title="Reset camera" aria-label="Reset camera"><svg class="ic"><use href="#i-reset"/></svg></button>
+        <button type="button" class="icon box" data-collapse aria-expanded="true" aria-controls="b-camera" aria-labelledby="h-camera"><svg class="ic chev"><use href="#i-chev"/></svg></button>
+      </div>
+      <div class="sec-body" id="b-camera"><div class="sec-in">
+        <div class="field"><div class="lab"><label for="zoom">Zoom</label><output for="zoom"></output></div><input type="range" id="zoom" min="1" max="60" step="0.01" value="1"></div>
+        <div class="field"><div class="lab"><label for="rot">Rotate</label><output for="rot"></output></div><input type="range" id="rot" min="-180" max="180" step="0.5" value="0"></div>
+        <div class="field"><div class="lab"><label for="cx">Move X</label><output for="cx"></output></div><input type="range" id="cx" min="-0.8" max="0.8" step="0.0001" value="0"></div>
+        <div class="field"><div class="lab"><label for="cy">Move Y</label><output for="cy"></output></div><input type="range" id="cy" min="-0.8" max="0.8" step="0.0001" value="0"></div>
+        <div class="field"><div class="lab"><label for="fine">Fine dots</label><output for="fine"></output></div><input type="range" id="fine" min="0" max="1" step="0.01" value="1"></div>
+      </div></div>
+    </section>
+
+    <section class="sec" data-sec="look">
+      <div class="sec-head">
+        <h2 id="h-look">Look</h2>
+        <button type="button" class="icon" data-reset title="Reset look" aria-label="Reset look"><svg class="ic"><use href="#i-reset"/></svg></button>
+        <button type="button" class="icon box" data-collapse aria-expanded="true" aria-controls="b-look" aria-labelledby="h-look"><svg class="ic chev"><use href="#i-chev"/></svg></button>
+      </div>
+      <div class="sec-body" id="b-look"><div class="sec-in">
+        <div class="two">
+          <div class="field"><span class="flabel" id="l-cBlue">Dots color</span>
+            <input type="color" id="cBlue" value="#2c3ad6" hidden>
+            <button type="button" class="cpick" data-for="cBlue" aria-haspopup="dialog" aria-expanded="false" aria-controls="cpop" aria-labelledby="l-cBlue n-cBlue"><span class="sw"><i></i></span><span class="cname" id="n-cBlue"></span><svg class="ic"><use href="#i-chev"/></svg></button></div>
+          <div class="field"><span class="flabel" id="l-cHot">Hot ring color</span>
+            <input type="color" id="cHot" value="#ffc49a" hidden>
+            <button type="button" class="cpick" data-for="cHot" aria-haspopup="dialog" aria-expanded="false" aria-controls="cpop" aria-labelledby="l-cHot n-cHot"><span class="sw"><i></i></span><span class="cname" id="n-cHot"></span><svg class="ic"><use href="#i-chev"/></svg></button></div>
+        </div>
+        <div class="field"><div class="lab"><label for="bright">Exposure</label><output for="bright"></output></div><input type="range" id="bright" min="0.2" max="8" step="0.01" value="8"></div>
+        <div class="field"><div class="lab"><label for="glow">Glow dots</label><output for="glow"></output></div><input type="range" id="glow" min="0" max="1" step="0.01" value="0.23"></div>
+        <div class="field"><div class="lab"><label for="gsize">Glow size</label><output for="gsize"></output></div><input type="range" id="gsize" min="0.5" max="4" step="0.01" value="3.63"></div>
+        <div class="field"><div class="lab"><label for="halo">Haze</label><output for="halo"></output></div><input type="range" id="halo" min="0" max="2" step="0.01" value="0"></div>
+        <div class="field"><div class="lab"><label for="grain">Grain</label><output for="grain"></output></div><input type="range" id="grain" min="0" max="0.3" step="0.005" value="0.03"></div>
+      </div></div>
+    </section>
+
+    <section class="sec" data-sec="export" id="exportBox" hidden>
+      <div class="sec-head">
+        <h2 id="h-export">Export</h2>
+        <button type="button" class="icon" data-reset title="Reset export" aria-label="Reset export"><svg class="ic"><use href="#i-reset"/></svg></button>
+        <button type="button" class="icon box" data-collapse aria-expanded="true" aria-controls="b-export" aria-labelledby="h-export"><svg class="ic chev"><use href="#i-chev"/></svg></button>
+      </div>
+      <div class="sec-body" id="b-export"><div class="sec-in">
+        <div class="two">
+          <div class="field"><label class="flabel" for="exportFmt">Format</label>
+            <select id="exportFmt"><option value="png">PNG</option><option value="gif">GIF</option><option value="mp4">MP4</option></select></div>
+          <div class="field"><label class="flabel" for="exportSize">Resolution</label>
+            <select id="exportSize"><option value="small">Small</option><option value="screen">Screen</option><option value="2x" selected>2x</option><option value="4k">4K</option></select></div>
+        </div>
+        <label class="switch"><input type="checkbox" id="transparent" role="switch">Transparent background</label>
+        <div class="field"><label class="flabel" for="exportLen">Length</label>
+          <select id="exportLen"><option value="3">3 seconds</option><option value="5" selected>5 seconds</option><option value="10">10 seconds</option></select></div>
+        <button type="button" class="btn primary" id="export"><svg class="ic"><use href="#i-export"/></svg><span>Export PNG</span></button>
+        <p class="hint" id="exportMsg" aria-live="polite"></p>
+      </div></div>
+    </section>
+
+    <p class="foot">Drag to move · Scroll to zoom · H hides the UI</p>
+  </div>
+</form>
+
+<!-- Color palette popover; lives outside the panel so the panel's scrolling and blur don't clip it -->
+<div class="cpop" id="cpop" role="dialog" aria-label="Choose a color" hidden><div class="swatches" role="radiogroup"></div></div>
+
+<script src="main.js?v=5"></script>
+</body>
+</html>
