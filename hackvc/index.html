@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>document.documentElement.classList.add('js');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#000000">
+  <title>Hack VC Website Redesign Proposal | Polify</title>
+  <meta name="description" content="Website redesign proposal for Hack VC, presented by Polify.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Inter:ital,wght@0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+html, body { margin: 0; }
+img { max-width: 100%; }
+/* Layout: Polify proposal template — black canvas, warped-grid hero, glow dividers, label|content rows at 1fr / 692px */
+:root {
+  --bg: #000;
+  --fg: #fff;
+  --fg-80: rgba(255,255,255,.8);
+  --fg-70: rgba(255,255,255,.7);
+  --fg-50: rgba(255,255,255,.5);
+  --fg-40: rgba(255,255,255,.4);
+  --rule: #fff;
+  --font-display: "Geist", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --pad-x: 120px;
+  --col: 692px;
+  --gap: 160px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body { color: var(--fg); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+p, h1, h2, h3, ul { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 1px solid var(--fg-50); outline-offset: 4px; }
+
+.page { display: flex; flex-direction: column; align-items: center; width: 100%; }
+
+/* ---------- Hero ---------- */
+.hero { position: relative; width: 100%; height: 849px; overflow: hidden; background: var(--bg); }
+.hero__grid { position: absolute; left: calc(50% + .5px); top: -414px; transform: translateX(-50%); width: 2183px; height: 1907px; max-width: none; pointer-events: none; }
+.hero__bar { position: absolute; top: 32px; left: max(32px, env(safe-area-inset-left, 0px)); right: max(32px, env(safe-area-inset-right, 0px)); display: flex; align-items: center; justify-content: space-between; }
+.hero__logo { display: block; width: 44px; height: 22px; }
+.hero__nav { display: flex; gap: 64px; font: 500 14px/16px var(--font-display); letter-spacing: -.28px; }
+.hero__nav a { opacity: .8; transition: opacity .2s; }
+.hero__nav a:hover { opacity: 1; }
+.hero__tag { position: absolute; left: 50%; top: calc(50% - 16px); transform: translateX(-50%); width: 164px; text-align: center; font: 500 14px/16px var(--font-display); letter-spacing: -.28px; opacity: .5; }
+.hero__title { position: absolute; left: 50%; top: 585px; transform: translateX(-50%); width: min(1200px, 100%); padding: 32px max(16px, env(safe-area-inset-right, 0px)) 32px max(16px, env(safe-area-inset-left, 0px)); display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; font-family: var(--font-display); font-weight: 400; }
+.hero__title h1 { font-weight: 400; font-size: 40px; line-height: 40px; letter-spacing: -.8px; }
+.hero__title h1 span { display: block; }
+.hero__by { font-size: 20px; line-height: 28px; letter-spacing: -.2px; color: var(--fg-50); white-space: nowrap; }
+
+/* ---------- Glow divider ---------- */
+.divider { position: relative; width: 100%; height: 395px; display: flex; align-items: center; justify-content: center; overflow: hidden; border-bottom: 1px solid var(--rule); padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px)); }
+.glow { position: absolute; left: 50%; transform: translateX(-50%); width: 1440px; height: 967px; max-width: none; pointer-events: none; }
+.divider .glow { bottom: -513.8px; }
+.divider h2 { position: relative; font: 500 40px/52px var(--font-body); letter-spacing: -.8px; }
+
+/* ---------- Project goal ---------- */
+.goal { width: 100%; min-height: 806px; display: flex; align-items: center; gap: var(--gap); padding-block: 104px; padding-left: max(var(--pad-x), env(safe-area-inset-left, 0px)); padding-right: max(var(--pad-x), env(safe-area-inset-right, 0px)); }
+.goal > * { flex: 1 1 0; min-width: 0; }
+.goal__lead { display: flex; flex-direction: column; gap: 16px; color: var(--fg-80); }
+.goal__eyebrow { font: 500 18px/28px var(--font-body); letter-spacing: -.36px; opacity: .5; }
+.goal__headline { font: 500 40px/52px var(--font-body); letter-spacing: -.8px; text-wrap: balance; }
+.goal__copy { display: flex; flex-direction: column; gap: 28px; font: 500 18px/28px var(--font-body); letter-spacing: -.36px; color: var(--fg-70); }
+.goal__copy em { font-style: italic; color: var(--fg); }
+.goal__copy .muted { color: var(--fg-40); }
+.goal__quote { font-style: italic; font-weight: 400; }
+
+/* ---------- Rows ---------- */
+.rule { display: block; width: 184px; height: 1px; max-width: 100%; }
+.row { position: relative; width: 100%; display: flex; align-items: center; gap: var(--gap); padding-block: 104px; padding-left: max(var(--pad-x), env(safe-area-inset-left, 0px)); padding-right: max(var(--pad-x), env(safe-area-inset-right, 0px)); }
+.row--top { align-items: flex-start; }
+.row__label { position: relative; flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: space-between; padding-block: 88px; }
+.row__label img.dot { width: 12px; height: 12px; flex: none; }
+.row__label h2 { font: 500 18px/28px var(--font-body); letter-spacing: -.36px; color: var(--fg); white-space: nowrap; }
+.row--top .row__label h2 { color: var(--fg-80); }
+.side-glow { position: absolute; left: calc(-1 * max(var(--pad-x), env(safe-area-inset-left, 0px))); top: 50%; transform: translateY(-50%); width: 182px; height: 680px; max-width: none; pointer-events: none; }
+.row__body { width: var(--col); flex: none; min-width: 0; display: flex; flex-direction: column; gap: 16px; font: 500 18px/28px var(--font-body); letter-spacing: -.36px; color: var(--fg-80); }
+.row__body .lead { color: var(--fg-80); }
+.row__body .note { opacity: .5; display: flex; flex-direction: column; gap: 8px; }
+
+/* Scope list */
+.scope { display: flex; flex-direction: column; gap: 64px; }
+.scope li { display: flex; flex-direction: column; gap: 16px; }
+.scope h3 { font: inherit; opacity: .5; }
+
+/* Dash lists, as set in the design */
+.dash li::before { content: "- "; }
+
+/* Timeline milestones */
+.dates { display: grid; gap: 16px; }
+.dates div { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; font-family: var(--font-display); font-variant-numeric: tabular-nums; }
+.dates dt { opacity: .5; }
+.dates dd { margin: 0; }
+
+/* Summary table */
+.summary { display: flex; flex-direction: column; gap: 16px; font-family: var(--font-display); font-variant-numeric: tabular-nums; }
+.summary div { display: flex; gap: 24px; }
+.summary dt, .summary dd { flex: 1 1 0; min-width: 0; margin: 0; }
+.summary dt { opacity: .5; }
+
+.row--fixed { height: 468px; padding-block: 72px; overflow: hidden; justify-content: center; }
+
+/* ---------- Thank you ---------- */
+.thanks { position: relative; width: 100%; height: 468px; overflow: hidden; display: flex; align-items: center; gap: var(--gap); padding-top: 72px; padding-bottom: 216px; padding-left: max(var(--pad-x), env(safe-area-inset-left, 0px)); padding-right: max(var(--pad-x), env(safe-area-inset-right, 0px)); border-bottom: 1px solid var(--rule); }
+.thanks .glow { bottom: -544.8px; left: calc(50% + 36px); }
+.thanks .row__label { flex: 1 1 0; }
+.wordmark { position: absolute; left: calc(50% + 4.5px); bottom: 0; transform: translate(-50%, 18.86%); width: min(1431px, 99.4%); height: auto; aspect-ratio: 1431 / 228; mix-blend-mode: overlay; pointer-events: none; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1180px) {
+  :root { --pad-x: 64px; --gap: 64px; --col: min(692px, 58%); }
+}
+@media (max-width: 760px) {
+  :root { --pad-x: 16px; --gap: 32px; --col: 100%; }
+  .hero { height: 640px; }
+  .hero__grid { top: -560px; }
+  .hero__bar { left: max(16px, env(safe-area-inset-left, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); top: 24px; }
+  .hero__nav { gap: 20px; }
+  .hero__tag { display: none; }
+  .hero__title { top: auto; bottom: 24px; flex-direction: column; align-items: flex-start; gap: 16px; }
+  .hero__title h1 { font-size: 32px; line-height: 34px; }
+  .hero__by { font-size: 16px; line-height: 24px; }
+  .divider { height: 280px; }
+  .divider h2, .goal__headline { font-size: 30px; line-height: 38px; }
+  .goal { flex-direction: column; align-items: stretch; min-height: 0; padding-block: 72px; gap: 40px; }
+  .row, .row--fixed { flex-direction: column; align-items: stretch; height: auto; padding-block: 56px; gap: 24px; }
+  .row__label { padding-block: 0; justify-content: flex-start; gap: 16px; }
+  .side-glow { display: none; }
+  .row__body { width: 100%; font-size: 16px; line-height: 26px; }
+  .scope { gap: 40px; }
+  .dates div, .summary div { grid-template-columns: 1fr; flex-direction: column; gap: 2px; }
+  .thanks { height: 300px; padding-top: 48px; padding-bottom: 140px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+/* Obzidian additions */
+.fill { color: var(--fg-50); }
+.beats { display: flex; flex-direction: column; gap: 16px; font-family: var(--font-display); font-variant-numeric: tabular-nums; }
+.beats div { display: grid; grid-template-columns: 112px 1fr; gap: 24px; }
+.beats dt { opacity: .5; }
+.beats dd { margin: 0; }
+.beats b { font-weight: 500; color: var(--fg); }
+.timeline { display: flex; flex-direction: column; gap: 10px; margin-block: 24px 16px; }
+.timeline__ruler { height: 18px; background:
+  repeating-linear-gradient(90deg, var(--fg-40) 0 1px, transparent 1px calc(100% / 21)) bottom / 100% 18px no-repeat,
+  repeating-linear-gradient(90deg, rgba(255,255,255,.18) 0 1px, transparent 1px calc(100% / 105)) bottom / 100% 8px no-repeat; }
+.timeline__track { display: flex; gap: 4px; }
+.seg { flex: var(--s) 1 0; min-width: 0; height: 120px; display: flex; flex-direction: column; justify-content: space-between; padding: 14px 14px 16px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 6px; }
+.seg__t { font: 500 13px/16px var(--font-display); color: var(--fg-50); font-variant-numeric: tabular-nums; }
+.seg__n { font: 500 18px/22px var(--font-body); letter-spacing: -.36px; color: var(--fg); }
+.timeline__end { display: flex; justify-content: space-between; font: 500 13px/16px var(--font-display); color: var(--fg-50); font-variant-numeric: tabular-nums; }
+@media (max-width: 1180px) { .seg__n { font-size: 15px; line-height: 19px; } .seg { padding: 12px 10px 14px; } }
+@media (max-width: 760px) {
+  .timeline__ruler, .timeline__end { display: none; }
+  .timeline__track { flex-direction: column; }
+  .seg { flex: none; height: auto; flex-direction: row; align-items: baseline; gap: 16px; padding: 14px 16px; }
+  .seg__t { flex: 0 0 40px; }
+}
+@media (max-width: 760px) { .beats div { grid-template-columns: 1fr; gap: 2px; } }
+
+/* ---------- Motion (from the ShownMedia proposal) ---------- */
+:root { --ease: cubic-bezier(.22, 1, .36, 1); }
+.js .hero__grid { opacity: 0; transform: translateX(-50%) scale(1.05); transition: opacity 2.4s ease, transform 3.6s var(--ease); }
+.js .hero [data-load] { opacity: 0; transform: translateY(12px); transition: opacity 1.2s var(--ease) var(--d, 0s), transform 1.2s var(--ease) var(--d, 0s); }
+.js .hero [data-load-fade] { opacity: 0; transition: opacity 1.2s var(--ease) var(--d, 0s); }
+.is-loaded .hero__grid { opacity: 1; transform: translateX(-50%); }
+.is-loaded .hero [data-load] { opacity: 1; transform: none; }
+.is-loaded .hero [data-load-fade] { opacity: .5; }
+
+.js [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity 1s var(--ease) var(--d, 0s), transform 1s var(--ease) var(--d, 0s); }
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+/* Glows keep their own positioning transform, so they only fade */
+.js [data-reveal="glow"] { transition: opacity 2.6s ease var(--d, 0s); }
+.js .glow[data-reveal], .js .glow[data-reveal].is-in { transform: translateX(-50%); }
+.js .side-glow[data-reveal], .js .side-glow[data-reveal].is-in { transform: translateY(-50%); }
+.js .wordmark[data-reveal], .js .wordmark[data-reveal].is-in { transform: translate(-50%, 18.86%); }
+/* Divider lines draw outward; section dots pop in just after their row */
+.js [data-reveal="line"] { opacity: 1; transform: scaleX(0); transition: transform 1.4s var(--ease); }
+.js [data-reveal="line"].is-in { transform: scaleX(1); }
+.js [data-reveal] > .dot { transform: scale(0); transition: transform .9s var(--ease) .25s; }
+.js [data-reveal].is-in > .dot { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .hero__grid, .js .hero [data-load], .js [data-reveal] { opacity: 1; transition: none; }
+  .js .hero [data-load-fade] { opacity: .5; transition: none; }
+  .js .hero [data-load], .js [data-reveal]:not(.glow):not(.side-glow):not(.wordmark) { transform: none; }
+  .js .hero__grid { transform: translateX(-50%); }
+  .js [data-reveal] > .dot { transform: none; transition: none; }
+}
+
+/* ---------- Selected work ---------- */
+.work { width: 100%; padding-bottom: 104px; }
+.work .row { padding-bottom: 24px; }
+.work__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 24px; padding-left: max(var(--pad-x), env(safe-area-inset-left, 0px)); padding-right: max(var(--pad-x), env(safe-area-inset-right, 0px)); }
+.case { margin: 0; min-width: 0; }
+.case__media { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; padding: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.13); background: #0a0a0a; cursor: pointer; transition: border-color .3s ease; }
+.case__media:hover { border-color: rgba(255,255,255,.3); }
+.case__media:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
+.case__media video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.case__play { position: absolute; right: 12px; bottom: 12px; display: flex; align-items: center; gap: 8px; padding: 6px 10px 6px 8px; border-radius: 999px; background: rgba(0,0,0,.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); font: 500 13px/16px var(--font-display); color: var(--fg); opacity: 0; transform: translateY(4px); transition: opacity .3s ease, transform .3s var(--ease); }
+.case__play svg { width: 12px; height: 12px; }
+.case__media:hover .case__play, .case__media:focus-visible .case__play { opacity: 1; transform: none; }
+.case figcaption { display: flex; justify-content: space-between; gap: 16px; margin-top: 16px; font: 500 18px/28px var(--font-body); letter-spacing: -.36px; color: var(--fg-80); }
+.case figcaption span { color: var(--fg-40); font-family: var(--font-display); font-variant-numeric: tabular-nums; transition: color .3s ease; }
+.case:hover figcaption span { color: var(--fg-80); }
+
+/* Full-length player */
+.player { width: min(1280px, calc(100vw - 32px)); max-width: none; max-height: none; padding: 0; border: 1px solid rgba(255,255,255,.13); background: #000; color: var(--fg); overflow: visible; }
+.player::backdrop { background: rgba(0,0,0,.88); backdrop-filter: blur(6px); }
+.player video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #000; }
+.player__bar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 16px; font: 500 15px/20px var(--font-body); color: var(--fg-80); }
+.player__close { appearance: none; border: 0; background: none; color: var(--fg-50); font: inherit; cursor: pointer; padding: 4px 0; }
+.player__close:hover, .player__close:focus-visible { color: var(--fg); }
+
+@media (max-width: 1000px) { .work__grid { grid-template-columns: 1fr; max-width: 720px; margin-inline: auto; } }
+@media (max-width: 760px) { .work__grid { gap: 32px; } .work { padding-bottom: 64px; } .case__play { opacity: 1; transform: none; } }
+
+/* ---------- Hack VC additions ---------- */
+.scores { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; font-family: var(--font-display); font-variant-numeric: tabular-nums; }
+.score { display: grid; grid-template-columns: minmax(0, 1fr) 200px 44px; gap: 20px; align-items: center; color: var(--fg-50); }
+.score__bar { height: 4px; border-radius: 2px; background: rgba(255,255,255,.1); overflow: hidden; }
+.score__bar i { display: block; height: 100%; width: calc(var(--v) / 5 * 100%); background: var(--fg-40); border-radius: 2px; }
+.score b { font-weight: 500; text-align: right; }
+.score--low { color: var(--fg); }
+.score--low .score__bar i { background: var(--fg); }
+.js .scores .score__bar i { width: 0; transition: width 1.4s var(--ease) calc(var(--i) * 80ms + .2s); }
+.js .is-in .scores .score__bar i { width: calc(var(--v) / 5 * 100%); }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.split h3, .groups h3 { font: inherit; opacity: .5; margin-bottom: 12px; }
+.groups { display: flex; flex-direction: column; gap: 40px; }
+.scope li li { display: list-item; gap: 0; }
+.scope li > ul.dash { margin-top: -4px; }
+.targets div { grid-template-columns: 1.4fr 1fr; }
+.guarantee__head { font: 500 40px/52px var(--font-body); letter-spacing: -.8px; color: var(--fg-80); max-width: 560px; text-wrap: balance; }
+.guarantee__text { color: var(--fg-40); }
+.guarantee__text strong { font-weight: 500; color: var(--fg-80); }
+.work__grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+a.case__media { color: inherit; }
+@media (max-width: 760px) {
+  .score { grid-template-columns: minmax(0, 1fr) 44px; grid-template-areas: "l v" "b b"; gap: 6px 16px; }
+  .score > span:first-child { grid-area: l; } .score > .score__bar { grid-area: b; } .score b { grid-area: v; }
+  .split { grid-template-columns: 1fr; }
+  .guarantee__head { font-size: 30px; line-height: 38px; }
+  .targets div { grid-template-columns: 1fr; }
+}
+@media (max-width: 1000px) { .work__grid--2 { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header class="hero">
+    <img class="hero__grid" src="assets/grid.svg" alt="">
+    <div class="hero__bar">
+      <img class="hero__logo" src="assets/polify-logo.svg" alt="Polify" data-load>
+      <p class="hero__tag" data-load-fade style="--d: .15s">Website redesign proposal and scope of work.</p>
+      <nav class="hero__nav" aria-label="Polify" data-load style="--d: .15s">
+        <a href="#">X.com</a>
+        <a href="#">Telegram</a>
+        <a href="#">Website</a>
+      </nav>
+    </div>
+    <div class="hero__title">
+      <h1 data-load style="--d: .3s"><span>Hack VC</span><span>Website Redesign Proposal</span></h1>
+      <p class="hero__by" data-load style="--d: .45s">Presented by Polify</p>
+    </div>
+  </header>
+
+  <section class="divider">
+    <img class="glow" src="assets/glow.svg" alt="" data-reveal="glow">
+    <h2 data-reveal>The proposal:</h2>
+  </section>
+
+  <section class="goal">
+    <div class="goal__lead" data-reveal>
+      <p class="goal__eyebrow">Project Goal</p>
+      <p class="goal__headline">Redesign the Hack VC website so founders and LPs know in seconds who you back, trust the firm, and know how to reach you.</p>
+    </div>
+    <div class="goal__copy" data-reveal style="--d: .1s">
+      <p>Keep what already works: the simple navigation, the thesis-driven positioning and the hacker character. Then make it read as <em>institutional, credible and clear</em> to every LP and founder who lands on it.</p>
+      <p class="muted">Designed and built in Webflow in a two-week sprint, with the LP Data Room connected to Attio.</p>
+    </div>
+  </section>
+
+  <img class="rule" src="assets/line.svg" alt="" data-reveal="line">
+
+  <section class="row row--top" aria-labelledby="heard-h">
+    <div class="row__label" data-reveal>
+      <img class="side-glow" src="assets/side-glow.svg" alt="" data-reveal="glow">
+      <img class="dot" src="assets/dot-active.svg" alt="">
+      <h2 id="heard-h">What We Heard</h2>
+    </div>
+    <div class="row__body" data-reveal style="--d: .1s">
+      <p>Ten people rated the current site. Navigation scored best. Credibility and trust scored lowest, so that is the main problem this redesign solves.</p>
+      <div class="scores">
+        <div class="score" style="--v: 3.75; --i: 0"><span>Ease of navigation</span><span class="score__bar"><i></i></span><b>3.75</b></div>
+        <div class="score" style="--v: 3.5; --i: 1"><span>Value for the time spent browsing</span><span class="score__bar"><i></i></span><b>3.5</b></div>
+        <div class="score" style="--v: 3.3; --i: 2"><span>Usefulness of the information</span><span class="score__bar"><i></i></span><b>3.3</b></div>
+        <div class="score" style="--v: 3.15; --i: 3"><span>Enjoyment of the experience</span><span class="score__bar"><i></i></span><b>3.15</b></div>
+        <div class="score" style="--v: 3.05; --i: 4"><span>Overall satisfaction</span><span class="score__bar"><i></i></span><b>3.05</b></div>
+        <div class="score" style="--v: 2.85; --i: 5"><span>Likelihood of returning or recommending it</span><span class="score__bar"><i></i></span><b>2.85</b></div>
+        <div class="score" style="--v: 2.8; --i: 6"><span>Appearance compared with other VC websites</span><span class="score__bar"><i></i></span><b>2.8</b></div>
+        <div class="score score--low" style="--v: 2.7; --i: 7"><span>Credibility and trust</span><span class="score__bar"><i></i></span><b>2.7</b></div>
+      </div>
+      <p class="note">Survey averages out of 5, from the Hack VC brief.</p>
+    </div>
+  </section>
+
+  <img class="rule" src="assets/line.svg" alt="" data-reveal="line">
+
+  <section class="row row--top" aria-labelledby="keep-h">
+    <div class="row__label" data-reveal>
+      <img class="side-glow" src="assets/side-glow.svg" alt="" data-reveal="glow">
+      <img class="dot" src="assets/dot.svg" alt="">
+      <h2 id="keep-h">Keep &amp; Change</h2>
+    </div>
+    <div class="row__body" data-reveal style="--d: .1s">
+      <div class="split">
+        <div>
+          <h3>Keep</h3>
+          <ul class="dash">
+            <li>The simple, concise navigation</li>
+            <li>The thesis-driven positioning and Insights</li>
+            <li>The logo and icon</li>
+            <li>The terminal character, made more institutional</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Change</h3>
+          <ul class="dash">
+            <li>Key figures on the first screen</li>
+            <li>A portfolio of only active, strong companies</li>
+            <li>Plainer copy on who you back</li>
+            <li>A lighter look, with a light mode</li>
+            <li>Type that reads well at small sizes</li>
+            <li>A clearly ordered team page</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <img class="rule" src="assets/line.svg" alt="" data-reveal="line">
+
+  <section class="row row--top" aria-labelledby="process-h">
+    <div class="row__label" data-reveal>
+      <img class="side-glow" src="assets/side-glow.svg" alt="" data-reveal="glow">
+      <img class="dot" src="assets/dot.svg" alt="">
+      <h2 id="process-h">Our Process</h2>
+    </div>
+    <div class="row__body" data-reveal style="--d: .1s">
+      <ol class="scope">
+        <li><h3>1. Creative Direction &amp; Moodboards</h3>
+          <p>We start by settling the open questions in the brief: color (dark with a light mode, green-tinted or light first), typeface (grotesk, serif or geometric, each with mono accents) and navigation.</p>
+          <p>We present a moodboard for each direction, with 1kx, Electric Capital and Dragonfly as reference points, so the team can choose with confidence before we commit to the full site.</p></li>
+        <li><h3>2. Homepage Design + Sitemap</h3>
+          <p>Once the direction is approved, we design the homepage in full detail: the “We Back Hackers.” headline, the key figures and the four focus areas, all on the first screen.</p>
+          <p>At the same time, we map the sitemap and wireframe every other page. This gives us alignment on both:</p>
+          <ul class="dash"><li>How the site should <em>look</em></li><li>How the full experience should <em>flow</em></li></ul></li>
+        <li><h3>3. Full Design &amp; Webflow Build</h3>
+          <p>Once the homepage and structure are approved, we design every page and move straight into Webflow. This includes:</p>
+          <ul class="dash">
+            <li>Desktop and mobile design</li>
+            <li>Motion and interactions</li>
+            <li>Webflow development and CMS setup</li>
+            <li>Attio integration for the LP Data Room</li>
+            <li>SEO and AI search setup</li>
+            <li>Final QA and launch</li>
+          </ul></li>
+      </ol>
+    </div>
+  </section>
+
+  <img class="rule" src="assets/line.svg" alt="" data-reveal="line">
+
+  <section class="row row--top" aria-labelledby="build-h">
+    <div class="row__label" data-reveal>
+      <img class="side-glow" src="assets/side-glow.svg" alt="" data-reveal="glow">
+      <img class="dot" src="assets/dot.svg" alt="">
+      <h2 id="build-h">What We’ll Build</h2>
+    </div>
+    <div class="row__body" data-reveal style="--d: .1s">
+      <div class="groups">
+        <div>
+          <h3>Pages</h3>
+          <ul class="dash">
+            <li>Homepage with key figures and best-known portfolio companies</li>
+            <li>“Start here” page that routes founders, LPs and everyone else</li>
+            <li>Founders page with the pitch form and four-step process</li>
+            <li>LP page with the thesis summary and Data Room access</li>
+            <li>Portfolio, Team, About and Insights</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Functionality</h3>
+          <ul class="dash">
+            <li>Short, mobile-first pitch form with deck upload and confirmation email</li>
+            <li>Gated Data Room with access requests, connected to Attio</li>
+            <li>Portfolio filter by sector and stage</li>
+            <li>Site-wide search across portfolio, insights and team</li>
+            <li>Searchable Insights library with tags, dates and newsletter sign-up</li>
+            <li>Breadcrumbs on every page</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Search &amp; AI visibility</h3>
+          <ul class="dash">
+            <li>“Hack VC” and “venture capital” in every headline subhead</li>
+            <li>One focus-area order everywhere: AI, compute, robotics, blockchain</li>
+            <li>Organization and Article schema, plus a short FAQ</li>
+            <li>Headlines as real text, never images</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note">Marketing-automation integrations beyond Attio and a logo refresh are not included, and can be quoted separately.</p>
+    </div>
+  </section>
+
+  <img class="rule" src="assets/line.svg" alt="" data-reveal="line">
+
+  <section class="row" aria-labelledby="success-h">
+    <div class="row__label" data-reveal>
+      <img class="side-glow" src="assets/side-glow.svg" alt="" data-reveal="glow">
+      <img class="dot" src="assets/dot.svg" alt="">
+      <h2 id="success-h">Success Criteria</h2>
+    </div>
+    <div class="row__body" data-reveal style="--d: .1s">
+      <p>We measure the redesign against the goals in your brief, with a follow-up survey after launch.</p>
+      <dl class="dates targets">
+        <div><dt>Credibility and trust</dt><dd>2.7 → 3.5 or higher</dd></div>
+        <div><dt>Overall satisfaction</dt><dd>3.05 → above 3.5</dd></div>
+        <div><dt>Likelihood to recommend</dt><dd>2.85 → above 3.5</dd></div>
+        <div><dt>Portfolio</dt><dd>Only active, strong companies</dd></div>
+        <div><dt>First screen</dt><dd>Focus areas clear at a glance</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <img class="rule" src="assets/line.svg" alt="" data-reveal="line">
+
+  <section class="row" aria-labelledby="rev-h">
+    <div class="row__label" data-reveal>
+      <img class="side-glow" src="assets/side-glow.svg" alt="" data-reveal="glow">
+      <img class="dot" src="assets/dot.svg" alt="">
+      <h2 id="rev-h">Revisions</h2>
+    </div>
+    <div class="row__body" data-reveal style="--d: .1s">
+      <p class="lead">Unlimited Iterations</p>
+      <div class="note">
+        <p>We want the final result to be something Hack VC genuinely loves.</p>
+        <p>There is no fixed number of revision rounds. We keep refining the design within the agreed scope until we reach the right result.</p>
+      </div>
+    </div>
+  </section>
+
+  <img class="rule" src="assets/line.svg" alt="" data-reveal="line">
+
+  <section class="row" aria-labelledby="timeline-h">
+    <div class="row__label" data-reveal>
+      <img class="side-glow" src="assets/side-glow.svg" alt="" data-reveal="glow">
+      <img class="dot" src="assets/dot.svg" alt="">
+      <h2 id="timeline-h">Timeline</h2>
+    </div>
+    <div class="row__body" data-reveal style="--d: .1s">
+      <p class="lead">2 Weeks</p>
+      <div class="note">
+        <p>One sprint, from moodboards through design, Webflow development and launch.</p>
+        <p>The timeline assumes final copy, the cleaned-up portfolio list, team details, logo files and Attio access are ready at kickoff, along with the real check size for the long blurb, and fast, consolidated feedback from the Hack VC team.</p>
+      </div>
+    </div>
+  </section>
+
+  <img class="rule" src="assets/line.svg" alt="" data-reveal="line">
+
+  <section class="row" aria-labelledby="invest-h">
+    <div class="row__label" data-reveal>
+      <img class="side-glow" src="assets/side-glow.svg" alt="" data-reveal="glow">
+      <img class="dot" src="assets/dot.svg" alt="">
+      <h2 id="invest-h">Investment</h2>
+    </div>
+    <div class="row__body" data-reveal style="--d: .1s">
+      <p class="lead">$7,000 USD</p>
+      <dl class="dates">
+        <div><dt>Design, 2-week sprint</dt><dd>$5,000</dd></div>
+        <div><dt>Webflow development</dt><dd>$2,000</dd></div>
+      </dl>
+      <div class="note">
+        <p>Fixed project fee including creative direction, UX/UI design, unlimited iterations, Webflow development, Attio integration and a launch-ready website.</p>
+      </div>
+    </div>
+  </section>
+
+  <img class="rule" src="assets/line.svg" alt="" data-reveal="line">
+
+  <section class="row" aria-labelledby="guar-h">
+    <div class="row__label" data-reveal>
+      <img class="side-glow" src="assets/side-glow.svg" alt="" data-reveal="glow">
+      <img class="dot" src="assets/dot.svg" alt="">
+      <h2 id="guar-h">Our Guarantee</h2>
+    </div>
+    <div class="row__body" data-reveal style="--d: .1s">
+      <p class="guarantee__head">If you don’t like the final result, you don’t have to pay.</p>
+      <p class="guarantee__text">We’ll work collaboratively throughout the process, with alignment at every stage and unlimited iterations within the agreed scope. If, after going through that process, we still aren’t able to create something Hack VC is happy with, <strong>there is no project fee.</strong></p>
+    </div>
+  </section>
+
+  <img class="rule" src="assets/line.svg" alt="" data-reveal="line">
+
+  <section class="row row--fixed" aria-labelledby="summary-h">
+    <div class="row__label" data-reveal>
+      <img class="side-glow" src="assets/side-glow.svg" alt="" data-reveal="glow">
+      <img class="dot" src="assets/dot.svg" alt="">
+      <h2 id="summary-h">Project Summary</h2>
+    </div>
+    <dl class="row__body summary" data-reveal style="--d: .1s">
+      <div><dt>Scope</dt><dd>Website redesign + Webflow development</dd></div>
+      <div><dt>Timeline</dt><dd>2 weeks</dd></div>
+      <div><dt>Revisions</dt><dd>Unlimited</dd></div>
+      <div><dt>Investment</dt><dd>$7,000 USD</dd></div>
+      <div><dt>Guarantee</dt><dd>Love the result or don’t pay</dd></div>
+    </dl>
+  </section>
+
+  <img class="rule" src="assets/line.svg" alt="" data-reveal="line">
+
+  <section class="work" aria-labelledby="work-h">
+    <div class="row">
+    <div class="row__label" data-reveal>
+      <img class="side-glow" src="assets/side-glow.svg" alt="" data-reveal="glow">
+      <img class="dot" src="assets/dot.svg" alt="">
+      <h2 id="work-h">Selected Work</h2>
+    </div>
+      <div class="row__body" data-reveal style="--d: .1s">
+        <p>A few of our recent websites, <span style="color:var(--fg)">in motion.</span></p>
+        <p class="note">Click any project to open the live site.</p>
+      </div>
+    </div>
+    <div class="work__grid work__grid--2">
+        <figure class="case" data-reveal>
+          <a class="case__media" href="https://bloomfi.xyz" target="_blank" rel="noopener" aria-label="Open BloomFi in a new tab">
+            <video autoplay muted loop playsinline preload="metadata" poster="../shownmedia/case-bloomfi.jpg">
+              <source src="../shownmedia/case-bloomfi.mp4" type='video/mp4; codecs="hvc1"'>
+              <source src="../shownmedia/case-bloomfi.webm" type="video/webm">
+            </video>
+            <span class="case__play" aria-hidden="true">Visit site ↗</span>
+          </a>
+          <figcaption>BloomFi <span>bloomfi.xyz</span></figcaption>
+        </figure>
+        <figure class="case" data-reveal style="--d: .1s">
+          <a class="case__media" href="https://blackbird.xyz" target="_blank" rel="noopener" aria-label="Open Blackbird in a new tab">
+            <video autoplay muted loop playsinline preload="metadata" poster="../shownmedia/case-blackbird.jpg">
+              <source src="../shownmedia/case-blackbird.mp4" type='video/mp4; codecs="hvc1"'>
+              <source src="../shownmedia/case-blackbird.webm" type="video/webm">
+            </video>
+            <span class="case__play" aria-hidden="true">Visit site ↗</span>
+          </a>
+          <figcaption>Blackbird <span>blackbird.xyz</span></figcaption>
+        </figure>
+        <figure class="case" data-reveal>
+          <a class="case__media" href="https://flynet-landing-six.vercel.app" target="_blank" rel="noopener" aria-label="Open Flynet in a new tab">
+            <video autoplay muted loop playsinline preload="metadata" poster="../shownmedia/case-flynet.jpg">
+              <source src="../shownmedia/case-flynet.mp4" type='video/mp4; codecs="hvc1"'>
+              <source src="../shownmedia/case-flynet.webm" type="video/webm">
+            </video>
+            <span class="case__play" aria-hidden="true">Visit site ↗</span>
+          </a>
+          <figcaption>Flynet <span>flynet-landing-six.vercel.app</span></figcaption>
+        </figure>
+        <figure class="case" data-reveal style="--d: .1s">
+          <a class="case__media" href="https://solaris-landing-six.vercel.app" target="_blank" rel="noopener" aria-label="Open Solaris in a new tab">
+            <video autoplay muted loop playsinline preload="metadata" poster="../shownmedia/case-solaris.jpg">
+              <source src="../shownmedia/case-solaris.mp4" type='video/mp4; codecs="hvc1"'>
+              <source src="../shownmedia/case-solaris.webm" type="video/webm">
+            </video>
+            <span class="case__play" aria-hidden="true">Visit site ↗</span>
+          </a>
+          <figcaption>Solaris <span>solaris-landing-six.vercel.app</span></figcaption>
+        </figure>
+    </div>
+  </section>
+
+  <section class="thanks">
+    <img class="glow" src="assets/glow.svg" alt="" data-reveal="glow">
+    <div class="row__label" data-reveal>
+      <img class="dot" src="assets/dot.svg" alt="">
+      <h2>Thank you!</h2>
+    </div>
+    <img class="wordmark" src="assets/polify-wordmark.svg" alt="" data-reveal="glow" style="--d: .4s">
+  </section>
+
+</main>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var items = [].slice.call(document.querySelectorAll('[data-reveal]'));
+
+  // Showcase loops: play while on screen, pause offscreen to save bandwidth
+  function initReels() {
+    var videos = [].slice.call(document.querySelectorAll('.case video'));
+    function play(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    if (!('IntersectionObserver' in window)) { videos.forEach(play); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        e.target.dataset.inView = e.isIntersecting ? '1' : '';
+        if (e.isIntersecting) play(e.target); else e.target.pause();
+      });
+    }, { rootMargin: '200px 0px' });
+    videos.forEach(function (v) { io.observe(v); });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) return;
+      videos.forEach(function (v) { if (v.dataset.inView === '1') play(v); });
+    });
+  }
+
+  // Full-length player with sound
+  function initPlayer() {
+    var dlg = document.getElementById('player');
+    if (!dlg || !dlg.showModal) return;
+    var vid = dlg.querySelector('video'), title = dlg.querySelector('.player__title');
+    document.querySelectorAll('.case__media').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        vid.src = btn.dataset.full; title.textContent = btn.dataset.title;
+        dlg.showModal();
+        var p = vid.play(); if (p && p.catch) p.catch(function () {});
+      });
+    });
+    function close() { dlg.close(); }
+    dlg.querySelector('.player__close').addEventListener('click', close);
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) close(); });
+    dlg.addEventListener('close', function () { vid.pause(); vid.removeAttribute('src'); vid.load(); });
+  }
+
+  function start() {
+    root.classList.add('is-loaded');
+    initReels(); initPlayer();
+    if (!('IntersectionObserver' in window)) { items.forEach(function (el) { el.classList.add('is-in'); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-in'); io.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    items.forEach(function (el) { io.observe(el); });
+  }
+  requestAnimationFrame(function () { requestAnimationFrame(start); });
+})();
+</script>
+</body>
+</html>
